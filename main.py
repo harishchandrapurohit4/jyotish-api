@@ -14,7 +14,7 @@ from astro_engine import (
     init_ephem,get_julian_day,local_to_ut,get_all_planets,get_lagna,
     get_house_cusps,get_planet_house,get_vimshottari_dasha,
     check_mangal_dosha,get_tithi,get_yoga,get_karana,
-    get_sunrise_sunset,calculate_ashtakoot,NAKSHATRA_NAMES,
+    get_sunrise_sunset,
 )
 EPHEM_PATH=os.environ.get('EPHEM_PATH','')
 init_ephem(EPHEM_PATH)

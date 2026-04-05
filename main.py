@@ -96,6 +96,20 @@ def panchang(req:PanchangRequest):
         yoga=get_yoga(sun_lon,moon_lon)
         karana=get_karana(sun_lon,moon_lon)
         sun_info=get_sunrise_sunset(jd,req.lat,req.lon,req.tz)
+        # Moonrise & Moonset
+        try:
+            import math
+            moon_pos = get_all_planets(jd)['Moon']['longitude']
+            moon_ra = moon_pos / 15
+            moon_rise_utc = (moon_ra - req.lon/15 + 24) % 24
+            moonrise_local = (moon_rise_utc + req.tz) % 24
+            moonset_local = (moonrise_local + 12.4) % 24
+            def fmt_time(h): return f'{int(h):02d}:{int((h%1)*60):02d}'
+            moonrise_str = fmt_time(moonrise_local)
+            moonset_str = fmt_time(moonset_local)
+        except:
+            moonrise_str = 'N/A'
+            moonset_str = 'N/A'
         # Guli Kaal & Yamghant calculation
         sr_parts = sun_info['sunrise'].split(':') if sun_info['sunrise'] != 'N/A' else ['6','27']
         ss_parts = sun_info['sunset'].split(':') if sun_info['sunset'] != 'N/A' else ['18','55']
@@ -120,7 +134,7 @@ def panchang(req:PanchangRequest):
         for name,p in planets.items():
             fp = full_planets.get(name,{})
             planets_with_deg[name] = {**p, 'degree': round(fp.get('degree_in_rashi',0),2), 'longitude': round(fp.get('longitude',0),2)}
-        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'abhijit_muhurat':f'{mt(abhijit_start)}-{mt(abhijit_end)}','tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'guli_kaal':f'{mt(guli_start)}-{mt(guli_end)}','yamghant':f'{mt(yam_start)}-{mt(yam_end)}','disha_shool':disha_shool_map.get(weekday_num,'—'),'planets':planets_with_deg}
+        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'abhijit_muhurat':f'{mt(abhijit_start)}-{mt(abhijit_end)}','tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'moonrise':moonrise_str,'moonset':moonset_str,'guli_kaal':f'{mt(guli_start)}-{mt(guli_end)}','yamghant':f'{mt(yam_start)}-{mt(yam_end)}','disha_shool':disha_shool_map.get(weekday_num,'—'),'planets':planets_with_deg}
     except Exception as e:
         raise HTTPException(500,f'Calculation error: {str(e)}')
 @app.post('/match-making')

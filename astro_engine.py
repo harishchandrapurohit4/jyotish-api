@@ -213,6 +213,24 @@ def _bhakoot_dosha_type(br,gr):
     if v in{6,8}:return'6-8 Dosha'
     return None
 
+NR=[0,0,1,1,2,2,3,3,3,4,4,5,5,6,6,7,7,7,8,8,9,9,10,10,11,11,11]
+RV=[2,1,0,3,2,1,0,3,2,1,0,3]
+RVA=[0,0,1,2,3,1,1,4,1,0,1,2]
+VC=[[2,1,1,0,1],[1,2,1,0,1],[1,1,2,0,1],[0,0,0,2,0],[1,1,1,0,2]]
+NG=[0,1,2,1,0,1,0,0,2,2,1,1,0,2,0,2,0,2,2,1,1,0,2,2,1,1,0]
+GC=[[6,5,1],[5,6,0],[1,0,6]]
+NN=[0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2]
+NY=[0,1,2,3,3,4,5,2,5,6,6,7,8,9,8,9,10,10,4,11,12,11,13,0,13,7,1]
+YE=[(0,8,0),(1,13,0),(2,11,1),(3,12,0),(4,10,1),(5,6,1),(7,9,0)]
+RL=[3,5,4,1,0,4,5,3,2,6,6,2]
+PF=[[2,2,2,2,1,0,0],[2,2,1,1,2,1,1],[2,2,2,2,0,0,1],[2,2,2,2,0,1,1],[2,0,1,1,2,2,1],[1,0,1,1,2,2,2],[0,0,1,0,2,2,2]]
+VARNA_N=['Shudra','Vaishya','Kshatriya','Brahmin']
+VASHYA_N=['Chatushpad','Manav','Jalachar','Vanchar','Keet']
+GANA_N=['Dev','Manav','Rakshasa']
+NADI_N=['Aadi','Madhya','Antya']
+YONI_N=['Ashwa','Gaja','Mesh','Sarpa','Shvan','Marjara','Mushika','Go','Mahisha','Vyaghra','Mriga','Vanara','Nakula','Simha']
+PLANET_N=['Sun','Moon','Jupiter','Mars','Mercury','Venus','Saturn']
+
 def calculate_ashtakoot(boy_nak,girl_nak):
     bn,gn=boy_nak,girl_nak
     br,gr=NR[bn],NR[gn]

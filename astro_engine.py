@@ -124,6 +124,15 @@ def check_mangal_dosha(mars_house):
     desc_map={1:'Mars in Lagna',2:'Mars in 2nd house',4:'Mars in 4th house',7:'Mars in 7th house',8:'Mars in 8th house',12:'Mars in 12th house'}
     return{'has_dosha':has_dosha,'mars_house':mars_house,'description':desc_map.get(mars_house,'No Mangal Dosha') if has_dosha else 'No Mangal Dosha'}
 
+def get_vikram_samvat(year, month, day):
+    """Calculate Vikram Samvat and Shaka Samvat"""
+    # Vikram Samvat = Gregorian + 56/57 (57 after mid-April)
+    vs = year + 56 if month >= 4 else year + 57
+    ss = year - 78  # Shaka Samvat
+    masa_names = ['Chaitra','Vaishakha','Jyeshtha','Ashadha','Shravana','Bhadrapada','Ashwina','Kartika','Margashirsha','Pausha','Magha','Phalguna']
+    masa = masa_names[(month - 4) % 12] if month >= 4 else masa_names[(month + 8) % 12]
+    return {'vikram_samvat': vs, 'shaka_samvat': ss, 'masa': masa}
+
 def get_tithi(sun_lon,moon_lon):
     diff=(moon_lon-sun_lon)%360
     tithi_num=int(diff/12)+1

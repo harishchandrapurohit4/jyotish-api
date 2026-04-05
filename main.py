@@ -9,6 +9,7 @@ from typing import Optional
 from datetime import datetime
 import os
 from astro_engine import (
+    get_vikram_samvat,
     init_ephem,get_julian_day,local_to_ut,get_all_planets,get_lagna,
     get_house_cusps,get_planet_house,get_vimshottari_dasha,
     check_mangal_dosha,get_tithi,get_yoga,get_karana,
@@ -90,11 +91,12 @@ def panchang(req:PanchangRequest):
         planets=get_all_planets(jd)
         sun_lon=planets['Sun']['longitude']
         moon_lon=planets['Moon']['longitude']
+        vs=get_vikram_samvat(y,mo,d)
         tithi=get_tithi(sun_lon,moon_lon)
         yoga=get_yoga(sun_lon,moon_lon)
         karana=get_karana(sun_lon,moon_lon)
         sun_info=get_sunrise_sunset(jd,req.lat,req.lon,req.tz)
-        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'planets':{k:{'rashi':v['rashi'],'nakshatra':v['nakshatra'],'retrograde':v['retrograde']} for k,v in planets.items()}}
+        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'planets':{k:{'rashi':v['rashi'],'nakshatra':v['nakshatra'],'retrograde':v['retrograde']} for k,v in planets.items()}}
     except Exception as e:
         raise HTTPException(500,f'Calculation error: {str(e)}')
 @app.post('/match-making')

@@ -142,45 +142,35 @@ def get_karana(sun_lon,moon_lon):
     return{'number':karana_num+1,'name':name}
 
 def get_sunrise_sunset(jd,lat,lon,tz):
+    import math
     try:
-        _,t_rise,_=swe.rise_trans(jd-1,swe.SUN,'',swe.CALC_RISE,lat,lon,0,0)
-        _,t_set,_=swe.rise_trans(jd-1,swe.SUN,'',swe.CALC_SET,lat,lon,0,0)
-        def jd_to_time(jd_time,tz):
-            frac=(jd_time%1)*24+tz
-            frac=frac%24
-            h=int(frac);m=int((frac-h)*60)
-            return f'{h:02d}:{m:02d}'
-        sunrise=jd_to_time(t_rise[0],tz)
-        sunset=jd_to_time(t_set[0],tz)
-        sr_parts=sunrise.split(':');ss_parts=sunset.split(':')
-        sr_min=int(sr_parts[0])*60+int(sr_parts[1])
-        ss_min=int(ss_parts[0])*60+int(ss_parts[1])
-        segment=(ss_min-sr_min)/8
+        n=jd-2451545.0
+        L=(280.46+0.9856474*n)%360
+        g=math.radians((357.528+0.9856003*n)%360)
+        lam=math.radians(L+1.915*math.sin(g)+0.020*math.sin(2*g))
+        sin_dec=math.sin(math.radians(23.439))*math.sin(lam)
+        dec=math.asin(sin_dec)
+        cos_ha=(math.sin(math.radians(-0.833))-math.sin(math.radians(lat))*sin_dec)/(math.cos(math.radians(lat))*math.cos(dec))
+        if abs(cos_ha)>1:
+            weekday=int(jd+1.5)%7
+            return{'sunrise':'N/A','sunset':'N/A','rahukaal':'N/A','weekday':WEEKDAY_NAMES[weekday]}
+        ha=math.degrees(math.acos(cos_ha))
+        B=math.radians(360/365*(n-81))
+        eot=9.87*math.sin(2*B)-7.53*math.cos(B)-1.5*math.sin(B)
+        noon_utc=720-4*lon-eot
+        sunrise_utc=noon_utc-4*ha
+        sunset_utc=noon_utc+4*ha
+        sr=( sunrise_utc+tz*60)%(24*60)
+        ss=(sunset_utc+tz*60)%(24*60)
+        def mt(m):
+            h=int(m//60)%24;mn=int(m%60);return f'{h:02d}:{mn:02d}'
+        segment=(ss-sr)/8
         weekday=int(jd+1.5)%7
         rahu_seg=RAHUKAAL_DAY.get(weekday,7)
-        rahu_start=sr_min+(rahu_seg-1)*segment
-        def mt(m): h=int(m//60);mn=int(m%60);return f'{h:02d}:{mn:02d}'
-        return{'sunrise':sunrise,'sunset':sunset,'rahukaal':f'{mt(rahu_start)}-{mt(rahu_start+segment)}','weekday':WEEKDAY_NAMES[weekday]}
-    except:
+        rahu_start=sr+(rahu_seg-1)*segment
+        return{'sunrise':mt(sr),'sunset':mt(ss),'rahukaal':f'{mt(rahu_start)}-{mt(rahu_start+segment)}','weekday':WEEKDAY_NAMES[weekday]}
+    except Exception as e:
         return{'sunrise':'N/A','sunset':'N/A','rahukaal':'N/A','weekday':'N/A'}
-
-NR=[0,0,1,1,2,2,3,3,3,4,4,5,5,6,6,7,7,7,8,8,9,9,10,10,11,11,11]
-RV=[2,1,0,3,2,1,0,3,2,1,0,3]
-RVA=[0,0,1,2,3,1,1,4,1,0,1,2]
-VC=[[2,1,1,0,1],[1,2,1,0,1],[1,1,2,0,1],[0,0,0,2,0],[1,1,1,0,2]]
-NG=[0,1,2,1,0,1,0,0,2,2,1,1,0,2,0,2,0,2,2,1,1,0,2,2,1,1,0]
-GC=[[6,5,1],[5,6,0],[1,0,6]]
-NN=[0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2,2,1,0,0,1,2]
-NY=[0,1,2,3,3,4,5,2,5,6,6,7,8,9,8,9,10,10,4,11,12,11,13,0,13,7,1]
-YE=[(0,8,0),(1,13,0),(2,11,1),(3,12,0),(4,10,1),(5,6,1),(7,9,0)]
-RL=[3,5,4,1,0,4,5,3,2,6,6,2]
-PF=[[2,2,2,2,1,0,0],[2,2,1,1,2,1,1],[2,2,2,2,0,0,1],[2,2,2,2,0,1,1],[2,0,1,1,2,2,1],[1,0,1,1,2,2,2],[0,0,1,0,2,2,2]]
-VARNA_N=['Shudra','Vaishya','Kshatriya','Brahmin']
-VASHYA_N=['Chatushpad','Manav','Jalachar','Vanchar','Keet']
-GANA_N=['Dev','Manav','Rakshasa']
-NADI_N=['Aadi','Madhya','Antya']
-YONI_N=['Ashwa','Gaja','Mesh','Sarpa','Shvan','Marjara','Mushika','Go','Mahisha','Vyaghra','Mriga','Vanara','Nakula','Simha']
-PLANET_N=['Sun','Moon','Jupiter','Mars','Mercury','Venus','Saturn']
 
 def _yoni_score(b,g):
     if b==g:return 4

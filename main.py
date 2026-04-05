@@ -111,13 +111,16 @@ def panchang(req:PanchangRequest):
         ys = yam_segs.get(weekday_num,0)
         guli_start = sr_min+gs*seg; guli_end = guli_start+seg
         yam_start = sr_min+ys*seg; yam_end = yam_start+seg
+        # Abhijit Muhurat — solar noon ±24 min
+        solar_noon = (sr_min+ss_min)/2
+        abhijit_start = solar_noon-24; abhijit_end = solar_noon+24
         # Get full planet data with degrees
         full_planets = get_all_planets(jd)
         planets_with_deg = {}
         for name,p in planets.items():
             fp = full_planets.get(name,{})
             planets_with_deg[name] = {**p, 'degree': round(fp.get('degree_in_rashi',0),2), 'longitude': round(fp.get('longitude',0),2)}
-        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'guli_kaal':f'{mt(guli_start)}-{mt(guli_end)}','yamghant':f'{mt(yam_start)}-{mt(yam_end)}','disha_shool':disha_shool_map.get(weekday_num,'—'),'planets':planets_with_deg}
+        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'abhijit_muhurat':f'{mt(abhijit_start)}-{mt(abhijit_end)}','tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'guli_kaal':f'{mt(guli_start)}-{mt(guli_end)}','yamghant':f'{mt(yam_start)}-{mt(yam_end)}','disha_shool':disha_shool_map.get(weekday_num,'—'),'planets':planets_with_deg}
     except Exception as e:
         raise HTTPException(500,f'Calculation error: {str(e)}')
 @app.post('/match-making')

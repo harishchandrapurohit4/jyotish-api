@@ -115,7 +115,18 @@ def get_vimshottari_dasha(jd,moon_lon,birth_date):
         years=remaining if i==0 else DASHA_PERIODS[lord]
         days=years*365.25
         end_date=current_date+timedelta(days=days)
-        dashas.append({'lord':lord,'start':current_date.strftime('%Y-%m-%d'),'end':end_date.strftime('%Y-%m-%d'),'years':round(years,2)})
+        # Antardasha calculation
+        antardashas=[]
+        antar_start=current_date
+        lord_idx=DASHA_ORDER.index(lord)
+        for j in range(9):
+            antar_lord=DASHA_ORDER[(lord_idx+j)%9]
+            antar_years=(DASHA_PERIODS[antar_lord]*years)/120
+            antar_days=antar_years*365.25
+            antar_end=antar_start+timedelta(days=antar_days)
+            antardashas.append({'lord':antar_lord,'start':antar_start.strftime('%Y-%m-%d'),'end':antar_end.strftime('%Y-%m-%d'),'years':round(antar_years,2)})
+            antar_start=antar_end
+        dashas.append({'lord':lord,'start':current_date.strftime('%Y-%m-%d'),'end':end_date.strftime('%Y-%m-%d'),'years':round(years,2),'antardashas':antardashas})
         current_date=end_date
     return{'current_dasha':dashas[0]['lord'],'dashas':dashas}
 

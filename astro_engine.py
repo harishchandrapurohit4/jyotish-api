@@ -1,5 +1,5 @@
 """
-JyotishRishi Astrology Calculation Engine
+JyotishRishi Astrology Calculation Engine - Updated for Accuracy
 Swiss Ephemeris (pyswisseph) based — Vedic/Sidereal
 """
 import swisseph as swe
@@ -7,6 +7,7 @@ import math
 from datetime import datetime, timedelta
 from typing import Optional
 
+# Constants
 NAKSHATRA_NAMES = [
     'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira', 'Ardra',
     'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'Purva Phalguni', 'Uttara Phalguni',
@@ -21,7 +22,15 @@ NAKSHATRA_LORDS = [
 ]
 RASHI_NAMES = ['Mesh','Vrishabha','Mithuna','Karka','Simha','Kanya','Tula','Vrishchika','Dhanu','Makara','Kumbha','Meena']
 RASHI_LORDS = ['Mars','Venus','Mercury','Moon','Sun','Mercury','Venus','Mars','Jupiter','Saturn','Saturn','Jupiter']
-PLANET_IDS = {'Sun':swe.SUN,'Moon':swe.MOON,'Mars':swe.MARS,'Mercury':swe.MERCURY,'Jupiter':swe.JUPITER,'Venus':swe.VENUS,'Saturn':swe.SATURN,'Rahu':swe.MEAN_NODE}
+
+# Updated to TRUE_NODE for better accuracy in Kundli
+PLANET_IDS = {
+    'Sun':swe.SUN, 'Moon':swe.MOON, 'Mars':swe.MARS, 
+    'Mercury':swe.MERCURY, 'Jupiter':swe.JUPITER, 
+    'Venus':swe.VENUS, 'Saturn':swe.SATURN, 
+    'Rahu':swe.TRUE_NODE 
+}
+
 TITHI_NAMES = ['Pratipada','Dwitiya','Tritiya','Chaturthi','Panchami','Shashthi','Saptami','Ashtami','Navami','Dashami','Ekadashi','Dwadashi','Trayodashi','Chaturdashi','Purnima/Amavasya']
 YOGA_NAMES = ['Vishkambha','Preeti','Ayushman','Saubhagya','Shobhana','Atiganda','Sukarman','Dhriti','Shoola','Ganda','Vriddhi','Dhruva','Vyaghata','Harshana','Vajra','Siddhi','Vyatipata','Variyan','Parigha','Shiva','Siddha','Sadhya','Shubha','Shukla','Brahma','Indra','Vaidhriti']
 KARANA_NAMES = ['Bava','Balava','Kaulava','Taitila','Gara','Vanija','Vishti','Shakuni','Chatushpada','Nagava','Kimstughna']
@@ -31,6 +40,7 @@ RAHUKAAL_DAY = {0:7,1:1,2:6,3:4,4:5,5:3,6:2}
 WEEKDAY_NAMES = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
 
 def init_ephem(path=''):
+    """Initialize Swiss Ephemeris with Lahiri Ayanamsa"""
     if path: swe.set_ephe_path(path)
     swe.set_sid_mode(swe.SIDM_LAHIRI)
 
@@ -38,7 +48,6 @@ def get_julian_day(year,month,day,hour_ut):
     return swe.julday(year,month,day,hour_ut)
 
 def local_to_ut(year,month,day,hour,minute,tz):
-    from datetime import datetime,timedelta
     total_minutes=hour*60+minute-tz*60
     base_date=datetime(year,month,day)+timedelta(minutes=total_minutes)
     ut_hour=base_date.hour+base_date.minute/60.0
@@ -51,12 +60,23 @@ def get_longitude_info(lon):
     nak_size=360/27
     nak_num=int(lon/nak_size)
     pada=int((lon%nak_size)/(nak_size/4))+1
-    return {'longitude':round(lon,4),'rashi':RASHI_NAMES[rashi_num],'rashi_num':rashi_num+1,'rashi_lord':RASHI_LORDS[rashi_num],'degree_in_rashi':round(degree_in_rashi,4),'nakshatra':NAKSHATRA_NAMES[nak_num],'nakshatra_num':nak_num+1,'nakshatra_lord':NAKSHATRA_LORDS[nak_num],'pada':pada}
+    return {
+        'longitude':round(lon,4),
+        'rashi':RASHI_NAMES[rashi_num],
+        'rashi_num':rashi_num+1,
+        'rashi_lord':RASHI_LORDS[rashi_num],
+        'degree_in_rashi':round(degree_in_rashi,4),
+        'nakshatra':NAKSHATRA_NAMES[nak_num],
+        'nakshatra_num':nak_num+1,
+        'nakshatra_lord':NAKSHATRA_LORDS[nak_num],
+        'pada':pada
+    }
 
 def get_planet_position(jd,planet_name):
     flags=swe.FLG_SIDEREAL|swe.FLG_SPEED
     if planet_name=='Ketu':
-        result=swe.calc_ut(jd,swe.MEAN_NODE,flags)
+        # Ketu is exactly 180 degrees from Rahu
+        result=swe.calc_ut(jd,swe.TRUE_NODE,flags)
         lon=(result[0][0]+180)%360
         speed=result[0][3]
     else:
@@ -115,7 +135,6 @@ def get_vimshottari_dasha(jd,moon_lon,birth_date):
         years=remaining if i==0 else DASHA_PERIODS[lord]
         days=years*365.25
         end_date=current_date+timedelta(days=days)
-        # Antardasha calculation
         antardashas=[]
         antar_start=current_date
         lord_idx=DASHA_ORDER.index(lord)
@@ -136,10 +155,8 @@ def check_mangal_dosha(mars_house):
     return{'has_dosha':has_dosha,'mars_house':mars_house,'description':desc_map.get(mars_house,'No Mangal Dosha') if has_dosha else 'No Mangal Dosha'}
 
 def get_vikram_samvat(year, month, day):
-    """Calculate Vikram Samvat and Shaka Samvat"""
-    # Vikram Samvat = Gregorian + 56/57 (57 after mid-April)
     vs = year + 56 if month >= 4 else year + 57
-    ss = year - 78  # Shaka Samvat
+    ss = year - 78 
     masa_names = ['Chaitra','Vaishakha','Jyeshtha','Ashadha','Shravana','Bhadrapada','Ashwina','Kartika','Margashirsha','Pausha','Magha','Phalguna']
     masa = masa_names[(month - 4) % 12] if month >= 4 else masa_names[(month + 8) % 12]
     return {'vikram_samvat': vs, 'shaka_samvat': ss, 'masa': masa}
@@ -161,37 +178,45 @@ def get_karana(sun_lon,moon_lon):
     name=KARANA_NAMES[(karana_num-1)%7] if 1<=karana_num<=56 else KARANA_NAMES[0]
     return{'number':karana_num+1,'name':name}
 
-def get_sunrise_sunset(jd,lat,lon,tz):
-    import math
+def get_sunrise_sunset(jd, lat, lon, tz):
+    """High Precision Sunrise/Sunset using Swiss Ephemeris"""
     try:
-        n=jd-2451545.0
-        L=(280.46+0.9856474*n)%360
-        g=math.radians((357.528+0.9856003*n)%360)
-        lam=math.radians(L+1.915*math.sin(g)+0.020*math.sin(2*g))
-        sin_dec=math.sin(math.radians(23.439))*math.sin(lam)
-        dec=math.asin(sin_dec)
-        cos_ha=(math.sin(math.radians(-0.833))-math.sin(math.radians(lat))*sin_dec)/(math.cos(math.radians(lat))*math.cos(dec))
-        if abs(cos_ha)>1:
-            weekday=int(jd+1.5)%7
-            return{'sunrise':'N/A','sunset':'N/A','rahukaal':'N/A','weekday':WEEKDAY_NAMES[weekday]}
-        ha=math.degrees(math.acos(cos_ha))
-        B=math.radians(360/365*(n-81))
-        eot=9.87*math.sin(2*B)-7.53*math.cos(B)-1.5*math.sin(B)
-        noon_utc=720-4*lon-eot
-        sunrise_utc=noon_utc-4*ha
-        sunset_utc=noon_utc+4*ha
-        sr=( sunrise_utc+tz*60)%(24*60)
-        ss=(sunset_utc+tz*60)%(24*60)
-        def mt(m):
-            h=int(m//60)%24;mn=int(m%60);return f'{h:02d}:{mn:02d}'
-        segment=(ss-sr)/8
-        weekday=int(jd+1.5)%7
-        rahu_seg=RAHUKAAL_DAY.get(weekday,7)
-        rahu_start=sr+(rahu_seg-1)*segment
-        return{'sunrise':mt(sr),'sunset':mt(ss),'rahukaal':f'{mt(rahu_start)}-{mt(rahu_start+segment)}','weekday':WEEKDAY_NAMES[weekday]}
-    except Exception as e:
-        return{'sunrise':'N/A','sunset':'N/A','rahukaal':'N/A','weekday':'N/A'}
+        # Use swe.rise_trans for precise calculations
+        # res_rise[0] returns the Julian Day of the event
+        res_rise = swe.rise_trans(jd, swe.SUN, lon, lat, 0, swe.CALC_RISE + swe.BIT_DISC_CENTER)
+        res_set = swe.rise_trans(jd, swe.SUN, lon, lat, 0, swe.CALC_SET + swe.BIT_DISC_CENTER)
+        
+        # Convert JD back to local hours
+        sr_local = (res_rise[0] - jd + 0.5) * 24 + tz
+        ss_local = (res_set[0] - jd + 0.5) * 24 + tz
+        
+        def mt(h):
+            h = h % 24
+            hr = int(h)
+            mn = int((h % 1) * 60)
+            return f"{hr:02d}:{mn:02d}"
 
+        sr_str = mt(sr_local)
+        ss_str = mt(ss_local)
+        
+        sr_min = (sr_local % 24) * 60
+        ss_min = (ss_local % 24) * 60
+        segment = (ss_min - sr_min) / 8
+        
+        weekday = int(jd + 0.5) % 7
+        rahu_seg = RAHUKAAL_DAY.get(weekday, 7)
+        rahu_start = sr_min + (rahu_seg - 1) * segment
+        
+        return {
+            'sunrise': sr_str,
+            'sunset': ss_str,
+            'rahukaal': f"{mt(rahu_start/60)}-{mt((rahu_start+segment)/60)}",
+            'weekday': WEEKDAY_NAMES[weekday]
+        }
+    except Exception as e:
+        return {'sunrise':'N/A','sunset':'N/A','rahukaal':'N/A','weekday':'N/A'}
+
+# Scoring functions (Yoni, Maitri, etc. remain the same)
 def _yoni_score(b,g):
     if b==g:return 4
     for a,c,s in YE:
@@ -224,6 +249,7 @@ def _bhakoot_dosha_type(br,gr):
     if v in{6,8}:return'6-8 Dosha'
     return None
 
+# Ashtakoot data and calculate_ashtakoot remain unchanged...
 NR=[0,0,1,1,2,2,3,3,3,4,4,5,5,6,6,7,7,7,8,8,9,9,10,10,11,11,11]
 RV=[2,1,0,3,2,1,0,3,2,1,0,3]
 RVA=[0,0,1,2,3,1,1,4,1,0,1,2]
@@ -258,9 +284,25 @@ def calculate_ashtakoot(boy_nak,girl_nak):
     if nadi_dosha:md.append('Nadi Dosha')
     if bhakoot_dosha:md.append(f'Bhakoot Dosha ({bhakoot_dosha})')
     if gana==0:md.append('Gana Dosha')
+    
     if total>=32:verdict='Uttam Milan'
     elif total>=27:verdict='Shubh Milan'
     elif total>=21:verdict='Madhyam Milan'
     elif total>=18:verdict='Sadhaaran Milan'
     else:verdict='Ashubh Milan'
-    return{'ashtakoota_points':total,'verdict':verdict,'major_doshas':md,'ashtakoota':{'varna':{'male_koot':VARNA_N[bVa],'female_koot':VARNA_N[gVa],'received_points':varna,'total_points':1},'vashya':{'male_koot':VASHYA_N[bVs],'female_koot':VASHYA_N[gVs],'received_points':vashya,'total_points':2},'tara':{'male_koot':NAKSHATRA_NAMES[bn],'female_koot':NAKSHATRA_NAMES[gn],'received_points':tara,'total_points':3},'yoni':{'male_koot':YONI_N[bY],'female_koot':YONI_N[gY],'received_points':yoni,'total_points':4},'maitri':{'male_koot':f'{PLANET_N[RL[br]]} ({RASHI_NAMES[br]})','female_koot':f'{PLANET_N[RL[gr]]} ({RASHI_NAMES[gr]})','received_points':maitri,'total_points':5},'gana':{'male_koot':GANA_N[bG],'female_koot':GANA_N[gG],'received_points':gana,'total_points':6},'bhakoot':{'male_koot':RASHI_NAMES[br],'female_koot':RASHI_NAMES[gr],'received_points':bhakoot,'total_points':7},'nadi':{'male_koot':NADI_N[bN],'female_koot':NADI_N[gN],'received_points':nadi,'total_points':8}}}
+    
+    return {
+        'ashtakoota_points':total,
+        'verdict':verdict,
+        'major_doshas':md,
+        'ashtakoota':{
+            'varna':{'male_koot':VARNA_N[bVa],'female_koot':VARNA_N[gVa],'received_points':varna,'total_points':1},
+            'vashya':{'male_koot':VASHYA_N[bVs],'female_koot':VASHYA_N[gVs],'received_points':vashya,'total_points':2},
+            'tara':{'male_koot':NAKSHATRA_NAMES[bn],'female_koot':NAKSHATRA_NAMES[gn],'received_points':tara,'total_points':3},
+            'yoni':{'male_koot':YONI_N[bY],'female_koot':YONI_N[gY],'received_points':yoni,'total_points':4},
+            'maitri':{'male_koot':f'{PLANET_N[RL[br]]} ({RASHI_NAMES[br]})','female_koot':f'{PLANET_N[RL[gr]]} ({RASHI_NAMES[gr]})','received_points':maitri,'total_points':5},
+            'gana':{'male_koot':GANA_N[bG],'female_koot':GANA_N[gG],'received_points':gana,'total_points':6},
+            'bhakoot':{'male_koot':RASHI_NAMES[br],'female_koot':RASHI_NAMES[gr],'received_points':bhakoot,'total_points':7},
+            'nadi':{'male_koot':NADI_N[bN],'female_koot':NADI_N[gN],'received_points':nadi,'total_points':8}
+        }
+    }

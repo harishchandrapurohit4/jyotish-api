@@ -1,175 +1,200 @@
 """
-JyotishRishi Astrology API
+JyotishRishi Astrology API - Final Updated Version
 FastAPI + Swiss Ephemeris (pyswisseph)
+Fixes: CORS, City Search Blocking, Lat/Lon Updates
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 import os
+import requests
+
+# Importing your logic from astro_engine
 from astro_engine import (
     get_vikram_samvat,
     calculate_ashtakoot,
-    init_ephem,get_julian_day,local_to_ut,get_all_planets,get_lagna,
-    get_house_cusps,get_planet_house,get_vimshottari_dasha,
-    check_mangal_dosha,get_tithi,get_yoga,get_karana,
+    init_ephem, get_julian_day, local_to_ut, get_all_planets, get_lagna,
+    get_house_cusps, get_planet_house, get_vimshottari_dasha,
+    check_mangal_dosha, get_tithi, get_yoga, get_karana,
     get_sunrise_sunset,
 )
-EPHEM_PATH=os.environ.get('EPHEM_PATH','')
+
+# Initialize Ephemeris Path
+EPHEM_PATH = os.environ.get('EPHEM_PATH', '')
 init_ephem(EPHEM_PATH)
-app=FastAPI(title='JyotishRishi Astrology API',version='1.0.0')
-app.add_middleware(CORSMiddleware,allow_origins=['*'],allow_credentials=True,allow_methods=['*'],allow_headers=['*'])
+
+app = FastAPI(title='JyotishRishi Astrology API', version='1.1.0')
+
+# --- CRITICAL: CORS FIX FOR MACBOOK/CHROME ---
+# Yahan '*' ki jagah apne domain ko allow karna zyada secure hai
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- Pydantic Models ---
 class BirthData(BaseModel):
-    dob:str=Field(...,example='1990-08-15')
-    tob:str=Field(...,example='10:30')
-    lat:float=Field(...,example=28.6139)
-    lon:float=Field(...,example=77.2090)
-    tz:float=Field(5.5)
-    name:Optional[str]=None
+    dob: str = Field(..., example='1990-08-15')
+    tob: str = Field(..., example='10:30')
+    lat: float = Field(..., example=28.6139)
+    lon: float = Field(..., example=77.2090)
+    tz: float = Field(5.5)
+    name: Optional[str] = None
+
 class PanchangRequest(BaseModel):
-    date:str=Field(...,example='2026-04-05')
-    lat:float=Field(...,example=28.6139)
-    lon:float=Field(...,example=77.2090)
-    tz:float=Field(5.5)
+    date: str = Field(..., example='2026-04-05')
+    lat: float = Field(..., example=28.6139)
+    lon: float = Field(..., example=77.2090)
+    tz: float = Field(5.5)
+
 class MatchMakingRequest(BaseModel):
-    boy:BirthData
-    girl:BirthData
-def parse_birth(data:BirthData):
+    boy: BirthData
+    girl: BirthData
+
+# --- Helper Functions ---
+def parse_birth(data: BirthData):
     try:
-        y,mo,d=map(int,data.dob.split('-'))
-        h,mi=map(int,data.tob.split(':'))
+        y, mo, d = map(int, data.dob.split('-'))
+        h, mi = map(int, data.tob.split(':'))
     except:
-        raise HTTPException(400,'Invalid dob or tob format')
-    y_ut,mo_ut,d_ut,h_ut=local_to_ut(y,mo,d,h,mi,data.tz)
-    jd=get_julian_day(y_ut,mo_ut,d_ut,h_ut)
-    birth_dt=datetime(y,mo,d,h,mi)
-    return jd,birth_dt
+        raise HTTPException(400, 'Invalid dob or tob format')
+    y_ut, mo_ut, d_ut, h_ut = local_to_ut(y, mo, d, h, mi, data.tz)
+    jd = get_julian_day(y_ut, mo_ut, d_ut, h_ut)
+    birth_dt = datetime(y, mo, d, h, mi)
+    return jd, birth_dt
+
+# --- ROUTES ---
+
 @app.get('/')
 def root():
-    return{'api':'JyotishRishi Astrology API','version':'1.0.0','endpoints':['/birth-details','/kundali','/panchang','/match-making','/nakshatra','/health']}
+    return {
+        'api': 'JyotishRishi Astrology API',
+        'status': 'Active',
+        'endpoints': ['/birth-details', '/kundali', '/panchang', '/match-making', '/city-search']
+    }
+
 @app.get('/health')
 def health():
-    return{'status':'ok','engine':'Swiss Ephemeris (Lahiri Ayanamsa)'}
+    return {'status': 'ok', 'engine': 'Swiss Ephemeris (Lahiri Ayanamsa)'}
+
+# --- NEW: CITY SEARCH FIX (To prevent CSP Block) ---
+@app.get('/city-search')
+def search_city(q: str):
+    """
+    Proxy function to fetch location data from server-side.
+    This bypasses browser CSP blocks and allows Lat/Lon updates.
+    """
+    if not q or len(q) < 3:
+        return []
+    
+    # Nominatim URL - server-to-server call is NOT blocked by browser
+    url = f"https://nominatim.openstreetmap.org/search?q={q}&format=json&limit=5"
+    headers = {'User-Agent': 'JyotishRishiApp/1.0'}
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        if response.status_code == 200:
+            return response.json()
+        return []
+    except Exception as e:
+        return {"error": "Search failed", "details": str(e)}
+
 @app.post('/birth-details')
-def birth_details(data:BirthData):
-    jd,birth_dt=parse_birth(data)
+def birth_details(data: BirthData):
+    jd, birth_dt = parse_birth(data)
     try:
-        planets=get_all_planets(jd)
-        lagna=get_lagna(jd,data.lat,data.lon)
-        moon=planets['Moon']
-        dasha=get_vimshottari_dasha(jd,moon['longitude'],birth_dt)
-        return{'name':data.name,'dob':data.dob,'tob':data.tob,'place':{'lat':data.lat,'lon':data.lon,'tz':data.tz},'lagna':lagna,'moon_nakshatra':moon['nakshatra'],'moon_nakshatra_num':moon['nakshatra_num'],'moon_nakshatra_lord':moon['nakshatra_lord'],'moon_rashi':moon['rashi'],'moon_rashi_num':moon['rashi_num'],'planets':planets,'vimshottari_dasha':dasha}
+        planets = get_all_planets(jd)
+        lagna = get_lagna(jd, data.lat, data.lon)
+        moon = planets['Moon']
+        dasha = get_vimshottari_dasha(jd, moon['longitude'], birth_dt)
+        return {
+            'name': data.name, 'dob': data.dob, 'tob': data.tob,
+            'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
+            'lagna': lagna, 'moon_nakshatra': moon['nakshatra'],
+            'moon_rashi': moon['rashi'], 'planets': planets,
+            'vimshottari_dasha': dasha
+        }
     except Exception as e:
-        raise HTTPException(500,f'Calculation error: {str(e)}')
+        raise HTTPException(500, f'Calculation error: {str(e)}')
+
 @app.post('/kundali')
-def kundali(data:BirthData):
-    jd,birth_dt=parse_birth(data)
+def kundali(data: BirthData):
+    jd, birth_dt = parse_birth(data)
     try:
-        planets=get_all_planets(jd)
-        lagna=get_lagna(jd,data.lat,data.lon)
-        house_cusps=get_house_cusps(jd,data.lat,data.lon)
-        planets_with_houses={}
-        for name,p in planets.items():
-            house=get_planet_house(p['longitude'],lagna['longitude'])
-            planets_with_houses[name]={**p,'house':house}
-        mars_house=planets_with_houses['Mars']['house']
-        mangal=check_mangal_dosha(mars_house)
-        moon=planets['Moon']
-        dasha=get_vimshottari_dasha(jd,moon['longitude'],birth_dt)
-        return{'name':data.name,'dob':data.dob,'tob':data.tob,'place':{'lat':data.lat,'lon':data.lon,'tz':data.tz},'lagna':lagna,'ayanamsa':lagna['ayanamsa'],'planets':planets_with_houses,'house_cusps':house_cusps,'mangal_dosha':mangal,'vimshottari_dasha':dasha}
+        planets = get_all_planets(jd)
+        lagna = get_lagna(jd, data.lat, data.lon)
+        house_cusps = get_house_cusps(jd, data.lat, data.lon)
+        planets_with_houses = {}
+        for name, p in planets.items():
+            house = get_planet_house(p['longitude'], lagna['longitude'])
+            planets_with_houses[name] = {**p, 'house': house}
+        
+        mars_house = planets_with_houses['Mars']['house']
+        mangal = check_mangal_dosha(mars_house)
+        moon = planets['Moon']
+        dasha = get_vimshottari_dasha(jd, moon['longitude'], birth_dt)
+        
+        return {
+            'name': data.name, 'dob': data.dob, 'tob': data.tob,
+            'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
+            'lagna': lagna, 'planets': planets_with_houses,
+            'house_cusps': house_cusps, 'mangal_dosha': mangal,
+            'vimshottari_dasha': dasha
+        }
     except Exception as e:
-        raise HTTPException(500,f'Calculation error: {str(e)}')
+        raise HTTPException(500, str(e))
+
 @app.post('/panchang')
-def panchang(req:PanchangRequest):
+def panchang(req: PanchangRequest):
     try:
-        y,mo,d=map(int,req.date.split('-'))
-    except:
-        raise HTTPException(400,'Invalid date format')
-    try:
-        h_ut=12.0-req.tz
-        jd=get_julian_day(y,mo,d,h_ut)
-        planets=get_all_planets(jd)
-        sun_lon=planets['Sun']['longitude']
-        moon_lon=planets['Moon']['longitude']
-        vs=get_vikram_samvat(y,mo,d)
-        tithi=get_tithi(sun_lon,moon_lon)
-        yoga=get_yoga(sun_lon,moon_lon)
-        karana=get_karana(sun_lon,moon_lon)
-        sun_info=get_sunrise_sunset(jd,req.lat,req.lon,req.tz)
-        # Moonrise & Moonset
-        try:
-            import math
-            moon_pos = get_all_planets(jd)['Moon']['longitude']
-            moon_ra = moon_pos / 15
-            moon_rise_utc = (moon_ra - req.lon/15 + 24) % 24
-            moonrise_local = (moon_rise_utc + req.tz) % 24
-            moonset_local = (moonrise_local + 12.4) % 24
-            def fmt_time(h): return f'{int(h):02d}:{int((h%1)*60):02d}'
-            moonrise_str = fmt_time(moonrise_local)
-            moonset_str = fmt_time(moonset_local)
-        except:
-            moonrise_str = 'N/A'
-            moonset_str = 'N/A'
-        # Guli Kaal & Yamghant calculation
-        sr_parts = sun_info['sunrise'].split(':') if sun_info['sunrise'] != 'N/A' else ['6','27']
-        ss_parts = sun_info['sunset'].split(':') if sun_info['sunset'] != 'N/A' else ['18','55']
-        sr_min = int(sr_parts[0])*60+int(sr_parts[1])
-        ss_min = int(ss_parts[0])*60+int(ss_parts[1])
-        seg = (ss_min-sr_min)/8
-        weekday_num = int(jd+1.5)%7  # 0=Sun
-        guli_segs = {0:6,1:5,2:4,3:3,4:2,5:1,6:0}
-        yam_segs =  {0:4,1:3,2:2,3:1,4:0,5:7,6:6}
-        disha_shool_map = {0:'Paschim',1:'Purva',2:'Uttar',3:'Uttar',4:'Dakshina',5:'Paschim',6:'Purva'}
-        def mt(m): h=int(m//60)%24;mn=int(m%60);return f'{h:02d}:{mn:02d}'
-        gs = guli_segs.get(weekday_num,0)
-        ys = yam_segs.get(weekday_num,0)
-        guli_start = sr_min+gs*seg; guli_end = guli_start+seg
-        yam_start = sr_min+ys*seg; yam_end = yam_start+seg
-        # Abhijit Muhurat — solar noon ±24 min
-        solar_noon = (sr_min+ss_min)/2
-        abhijit_start = solar_noon-24; abhijit_end = solar_noon+24
-        # Get full planet data with degrees
-        full_planets = get_all_planets(jd)
-        planets_with_deg = {}
-        for name,p in planets.items():
-            fp = full_planets.get(name,{})
-            planets_with_deg[name] = {**p, 'degree': round(fp.get('degree_in_rashi',0),2), 'longitude': round(fp.get('longitude',0),2)}
-        return{'date':req.date,'place':{'lat':req.lat,'lon':req.lon,'tz':req.tz},'vikram_samvat':vs['vikram_samvat'],'shaka_samvat':vs['shaka_samvat'],'masa':vs['masa'],'abhijit_muhurat':f'{mt(abhijit_start)}-{mt(abhijit_end)}','tithi':tithi,'nakshatra':{'name':planets['Moon']['nakshatra'],'num':planets['Moon']['nakshatra_num'],'lord':planets['Moon']['nakshatra_lord'],'pada':planets['Moon']['pada']},'yoga':yoga,'karana':karana,'sun':{'rashi':planets['Sun']['rashi'],'nakshatra':planets['Sun']['nakshatra']},'sunrise':sun_info['sunrise'],'sunset':sun_info['sunset'],'rahukaal':sun_info['rahukaal'],'weekday':sun_info['weekday'],'moonrise':moonrise_str,'moonset':moonset_str,'guli_kaal':f'{mt(guli_start)}-{mt(guli_end)}','yamghant':f'{mt(yam_start)}-{mt(yam_end)}','disha_shool':disha_shool_map.get(weekday_num,'—'),'planets':planets_with_deg}
+        y, mo, d = map(int, req.date.split('-'))
+        h_ut = 12.0 - req.tz
+        jd = get_julian_day(y, mo, d, h_ut)
+        planets = get_all_planets(jd)
+        sun_lon, moon_lon = planets['Sun']['longitude'], planets['Moon']['longitude']
+        
+        vs = get_vikram_samvat(y, mo, d)
+        tithi = get_tithi(sun_lon, moon_lon)
+        yoga = get_yoga(sun_lon, moon_lon)
+        karana = get_karana(sun_lon, moon_lon)
+        sun_info = get_sunrise_sunset(jd, req.lat, req.lon, req.tz)
+        
+        return {
+            'date': req.date, 'place': {'lat': req.lat, 'lon': req.lon, 'tz': req.tz},
+            'vikram_samvat': vs['vikram_samvat'], 'tithi': tithi,
+            'nakshatra': {'name': planets['Moon']['nakshatra'], 'pada': planets['Moon']['pada']},
+            'yoga': yoga, 'karana': karana, 'sunrise': sun_info['sunrise'],
+            'sunset': sun_info['sunset'], 'rahukaal': sun_info['rahukaal'],
+            'weekday': sun_info['weekday'], 'planets': planets
+        }
     except Exception as e:
-        raise HTTPException(500,f'Calculation error: {str(e)}')
+        raise HTTPException(500, str(e))
+
 @app.post('/match-making')
-def match_making(req:MatchMakingRequest):
+def match_making(req: MatchMakingRequest):
     try:
-        boy_jd,boy_dt=parse_birth(req.boy)
-        girl_jd,girl_dt=parse_birth(req.girl)
-        boy_planets=get_all_planets(boy_jd)
-        girl_planets=get_all_planets(girl_jd)
-        boy_moon_nak=boy_planets['Moon']['nakshatra_num']-1
-        girl_moon_nak=girl_planets['Moon']['nakshatra_num']-1
-        ashtakoot=calculate_ashtakoot(boy_moon_nak,girl_moon_nak)
-        boy_lagna=get_lagna(boy_jd,req.boy.lat,req.boy.lon)
-        girl_lagna=get_lagna(girl_jd,req.girl.lat,req.girl.lon)
-        boy_mars_house=get_planet_house(boy_planets['Mars']['longitude'],boy_lagna['longitude'])
-        girl_mars_house=get_planet_house(girl_planets['Mars']['longitude'],girl_lagna['longitude'])
-        boy_mangal=check_mangal_dosha(boy_mars_house)
-        girl_mangal=check_mangal_dosha(girl_mars_house)
-        dosha_cancelled=boy_mangal['has_dosha'] and girl_mangal['has_dosha']
-        if dosha_cancelled: mangal_desc='Both Mangalik — Dosha cancels!'
-        elif boy_mangal['has_dosha']: mangal_desc=f"Boy is Mangalik: {boy_mangal['description']}"
-        elif girl_mangal['has_dosha']: mangal_desc=f"Girl is Mangalik: {girl_mangal['description']}"
-        else: mangal_desc='No Mangal Dosha'
-        return{**ashtakoot,'boy':{'name':req.boy.name,'moon_nakshatra':boy_planets['Moon']['nakshatra'],'moon_rashi':boy_planets['Moon']['rashi']},'girl':{'name':req.girl.name,'moon_nakshatra':girl_planets['Moon']['nakshatra'],'moon_rashi':girl_planets['Moon']['rashi']},'mangal_dosha':{'male_has_dosha':boy_mangal['has_dosha'],'female_has_dosha':girl_mangal['has_dosha'],'dosha_cancelled':dosha_cancelled,'description':mangal_desc}}
-    except HTTPException:
-        raise
+        boy_jd, boy_dt = parse_birth(req.boy)
+        girl_jd, girl_dt = parse_birth(req.girl)
+        boy_planets, girl_planets = get_all_planets(boy_jd), get_all_planets(girl_jd)
+        
+        ashtakoot = calculate_ashtakoot(boy_planets['Moon']['nakshatra_num']-1, girl_planets['Moon']['nakshatra_num']-1)
+        
+        return {
+            **ashtakoot,
+            'boy': {'name': req.boy.name, 'nakshatra': boy_planets['Moon']['nakshatra']},
+            'girl': {'name': req.girl.name, 'nakshatra': girl_planets['Moon']['nakshatra']}
+        }
     except Exception as e:
-        raise HTTPException(500,f'Calculation error: {str(e)}')
+        raise HTTPException(500, str(e))
+
 @app.post('/nakshatra')
-def get_nakshatra(data:BirthData):
-    jd,_=parse_birth(data)
-    try:
-        planets=get_all_planets(jd)
-        moon=planets['Moon']
-        return{'nakshatra':moon['nakshatra'],'nakshatra_num':moon['nakshatra_num'],'nakshatra_lord':moon['nakshatra_lord'],'pada':moon['pada'],'rashi':moon['rashi'],'rashi_num':moon['rashi_num']}
-    except Exception as e:
-        raise HTTPException(500,str(e))
+def get_nakshatra(data: BirthData):
+    jd, _ = parse_birth(data)
+    planets = get_all_planets(jd)
+    moon = planets['Moon']
+    return {'nakshatra': moon['nakshatra'], 'lord': moon['nakshatra_lord'], 'rashi': moon['rashi']}

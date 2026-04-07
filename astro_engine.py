@@ -183,12 +183,20 @@ def get_sunrise_sunset(jd, lat, lon, tz):
     try:
         # Use swe.rise_trans for precise calculations
         # res_rise[0] returns the Julian Day of the event
-        res_rise = swe.rise_trans(jd, swe.SUN, '', swe.FLG_SWIEPH, swe.CALC_RISE, (lon, lat, 0), 1013.25, 10)
-        res_set = swe.rise_trans(jd, swe.SUN, '', swe.FLG_SWIEPH, swe.CALC_SET, (lon, lat, 0), 1013.25, 10)
-        
-        # Convert JD back to local hours
-        sr_local = (res_rise[0] - jd + 0.5) * 24 + tz
-        ss_local = (res_set[0] - jd + 0.5) * 24 + tz
+        import math
+        # Simple sunrise calculation
+        d = jd - 2451545.0
+        g = math.radians((357.529 + 0.98560028 * d) % 360)
+        q = (280.459 + 0.98564736 * d) % 360
+        L = math.radians((q + 1.915 * math.sin(g) + 0.020 * math.sin(2*g)) % 360)
+        e = math.radians(23.439 - 0.0000004 * d)
+        dec = math.asin(math.sin(e) * math.sin(L))
+        lat_r = math.radians(lat)
+        ha = math.acos(-math.tan(lat_r) * math.tan(dec))
+        ha_deg = math.degrees(ha)
+        noon = 12 - lon/15
+        sr_local = noon - ha_deg/15 + tz
+        ss_local = noon + ha_deg/15 + tz
         
         def mt(h):
             h = h % 24

@@ -13,6 +13,7 @@ import requests
 
 # Importing your logic from astro_engine
 from astro_engine import (
+    get_guli_yamghant, get_abhijit, DISHA_SHOOL, TITHI_DEITY,
     get_vikram_samvat,
     calculate_ashtakoot,
     init_ephem, get_julian_day, local_to_ut, get_all_planets, get_lagna,
@@ -170,7 +171,7 @@ def panchang(req: PanchangRequest):
             'nakshatra': {'name': planets['Moon']['nakshatra'], 'pada': planets['Moon']['pada'], 'lord': planets['Moon']['nakshatra_lord']},
             'yoga': yoga, 'karana': karana, 'sunrise': sun_info['sunrise'],
             'sunset': sun_info['sunset'], 'rahukaal': sun_info['rahukaal'],
-            'weekday': sun_info['weekday'], 'planets': planets
+            'weekday': sun_info['weekday'], 'sun_rashi': planets['Sun']['rashi'], 'disha_shool': DISHA_SHOOL.get(sun_info['weekday'], ''), 'abhijit_muhurat': get_abhijit(sun_info['sunrise'], sun_info['sunset']), **get_guli_yamghant(sun_info['sunrise'], sun_info['sunset'], sun_info['weekday']), 'tithi_deity': TITHI_DEITY.get(tithi['number'], ''), 'planets': planets
         }
     except Exception as e:
         raise HTTPException(500, str(e))

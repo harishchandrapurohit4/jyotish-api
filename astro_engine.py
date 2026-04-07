@@ -314,3 +314,45 @@ def calculate_ashtakoot(boy_nak,girl_nak):
             'nadi':{'male_koot':NADI_N[bN],'female_koot':NADI_N[gN],'received_points':nadi,'total_points':8}
         }
     }
+# Disha Shool - weekday based direction to avoid
+DISHA_SHOOL = {
+    'Sunday': 'Paschim (West)', 'Monday': 'Purv (East)', 'Tuesday': 'Uttar (North)',
+    'Wednesday': 'Uttar (North)', 'Thursday': 'Dakshina (South)', 'Friday': 'Paschim (West)',
+    'Saturday': 'Purv (East)'
+}
+
+# Tithi Deity
+TITHI_DEITY = {
+    1:'Agni', 2:'Brahma', 3:'Gauri', 4:'Ganesh', 5:'Nag', 6:'Kartikeya',
+    7:'Surya', 8:'Shiva', 9:'Durga', 10:'Yama', 11:'Vishnu', 12:'Vishnu',
+    13:'Kamdev', 14:'Shiva', 15:'Chandra', 30:'Shiva'
+}
+
+def get_guli_yamghant(sunrise_str, sunset_str, weekday):
+    try:
+        sr = sum(int(x)*60**(1-i) for i,x in enumerate(sunrise_str.split(':')))
+        ss = sum(int(x)*60**(1-i) for i,x in enumerate(sunset_str.split(':')))
+        seg = (ss - sr) / 8
+        GULI_SEG = {'Sunday':6,'Monday':5,'Tuesday':4,'Wednesday':3,'Thursday':2,'Friday':1,'Saturday':7}
+        YAMGH_SEG = {'Sunday':4,'Monday':3,'Tuesday':2,'Wednesday':1,'Thursday':7,'Friday':6,'Saturday':5}
+        def mt(m): return f"{int(m//60):02d}:{int(m%60):02d}"
+        gs = GULI_SEG.get(weekday, 1)
+        ys = YAMGH_SEG.get(weekday, 1)
+        g_start = sr + (gs-1)*seg
+        y_start = sr + (ys-1)*seg
+        return {
+            'guli_kaal': f"{mt(g_start)}-{mt(g_start+seg)}",
+            'yamghant': f"{mt(y_start)}-{mt(y_start+seg)}"
+        }
+    except:
+        return {'guli_kaal': 'N/A', 'yamghant': 'N/A'}
+
+def get_abhijit(sunrise_str, sunset_str):
+    try:
+        sr = sum(int(x)*60**(1-i) for i,x in enumerate(sunrise_str.split(':')))
+        ss = sum(int(x)*60**(1-i) for i,x in enumerate(sunset_str.split(':')))
+        noon = (sr + ss) / 2
+        def mt(m): return f"{int(m//60):02d}:{int(m%60):02d}"
+        return f"{mt(noon - 24)}-{mt(noon + 24)}"
+    except:
+        return 'N/A'

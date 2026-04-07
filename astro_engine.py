@@ -324,8 +324,9 @@ DISHA_SHOOL = {
 # Tithi Deity
 TITHI_DEITY = {
     1:'Agni', 2:'Brahma', 3:'Gauri', 4:'Ganesh', 5:'Nag', 6:'Kartikeya',
+    16:'Agni', 17:'Brahma', 18:'Gauri', 19:'Ganesh', 20:'Nag', 21:'Kartikeya',
     7:'Surya', 8:'Shiva', 9:'Durga', 10:'Yama', 11:'Vishnu', 12:'Vishnu',
-    13:'Kamdev', 14:'Shiva', 15:'Chandra', 30:'Shiva'
+    13:'Kamdev', 14:'Shiva', 15:'Chandra', 22:'Surya', 23:'Shiva', 24:'Durga', 25:'Yama', 26:'Vishnu', 27:'Vishnu', 28:'Kamdev', 29:'Shiva', 30:'Chandra'
 }
 
 def get_guli_yamghant(sunrise_str, sunset_str, weekday):

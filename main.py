@@ -166,8 +166,8 @@ def panchang(req: PanchangRequest):
         
         return {
             'date': req.date, 'place': {'lat': req.lat, 'lon': req.lon, 'tz': req.tz},
-            'vikram_samvat': vs['vikram_samvat'], 'tithi': tithi,
-            'nakshatra': {'name': planets['Moon']['nakshatra'], 'pada': planets['Moon']['pada']},
+            'vikram_samvat': vs['vikram_samvat'], 'shaka_samvat': vs['shaka_samvat'], 'tithi': tithi,
+            'nakshatra': {'name': planets['Moon']['nakshatra'], 'pada': planets['Moon']['pada'], 'lord': planets['Moon']['nakshatra_lord']},
             'yoga': yoga, 'karana': karana, 'sunrise': sun_info['sunrise'],
             'sunset': sun_info['sunset'], 'rahukaal': sun_info['rahukaal'],
             'weekday': sun_info['weekday'], 'planets': planets

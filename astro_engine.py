@@ -357,3 +357,24 @@ def get_abhijit(sunrise_str, sunset_str):
         return f"{mt(noon - 24)}-{mt(noon + 24)}"
     except:
         return 'N/A'
+
+def get_ritu_ayan(month, day):
+    # Ritu (Indian seasons)
+    if (month == 3 and day >= 21) or (month == 4) or (month == 5 and day <= 20):
+        ritu = 'Vasant'
+    elif (month == 5 and day >= 21) or (month == 6) or (month == 7 and day <= 22):
+        ritu = 'Grishma'
+    elif (month == 7 and day >= 23) or (month == 8) or (month == 9 and day <= 22):
+        ritu = 'Varsha'
+    elif (month == 9 and day >= 23) or (month == 10) or (month == 11 and day <= 21):
+        ritu = 'Sharad'
+    elif (month == 11 and day >= 22) or (month == 12) or (month == 1 and day <= 19):
+        ritu = 'Hemant'
+    else:
+        ritu = 'Shishir'
+    # Ayan
+    if 3 <= month <= 8:
+        ayan = 'Uttarayan'
+    else:
+        ayan = 'Dakshinayan'
+    return {'ritu': ritu, 'ayana': ayan}

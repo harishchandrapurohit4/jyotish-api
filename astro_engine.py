@@ -378,3 +378,25 @@ def get_ritu_ayan(month, day):
     else:
         ayan = 'Dakshinayan'
     return {'ritu': ritu, 'ayana': ayan}
+
+def get_moonrise_moonset(jd, lat, lon, tz):
+    try:
+        import math
+        # Moon rises ~50 minutes later each day
+        # Approximate moonrise based on moon longitude
+        moon_lon = swe.calc_ut(jd, swe.MOON)[0][0]
+        sun_lon = swe.calc_ut(jd, swe.SUN)[0][0]
+        
+        # Moon age (0-360)
+        moon_age = (moon_lon - sun_lon) % 360
+        
+        # Approximate moonrise time
+        sunrise_offset = moon_age / 360 * 24  # hours after sunrise
+        sr = 6.5  # approximate sunrise in hours
+        moonrise = (sr + sunrise_offset) % 24
+        moonset = (moonrise + 12.5) % 24
+        
+        def mt(h): return f"{int(h):02d}:{int((h%1)*60):02d}"
+        return {'moonrise': mt(moonrise), 'moonset': mt(moonset)}
+    except:
+        return {'moonrise': 'N/A', 'moonset': 'N/A'}

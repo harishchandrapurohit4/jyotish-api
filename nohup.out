@@ -1,0 +1,1663 @@
+nohup: ignoring input
+INFO:     Started server process [1410]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 98] error while attempting to bind on address ('0.0.0.0', 8000): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Started server process [51374]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:38524 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:38512 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:51402 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51418 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51428 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:51440 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40048 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40064 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40076 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40078 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43354 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43360 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:60838 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60854 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60862 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:60874 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43372 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:43374 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:53368 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53382 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53398 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:53406 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:42690 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:42682 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40192 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40206 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40226 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40218 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:38762 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38764 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38766 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:38776 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40362 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:40354 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:39196 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:39204 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:44114 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44124 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44146 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:44130 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:46058 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51374]
+INFO:     Started server process [51562]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:59672 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:34312 - "GET /actuator/gateway/routes HTTP/1.0" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51562]
+INFO:     Started server process [51679]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:56352 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52384 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52374 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:52390 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46690 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46698 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:46708 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:57342 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     127.0.0.1:37858 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50494 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44538 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51679]
+INFO:     Started server process [51807]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:57492 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51807]
+INFO:     Started server process [51868]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:47280 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51868]
+INFO:     Started server process [51901]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:39350 - "POST /auto-rashifal HTTP/1.0" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51901]
+INFO:     Started server process [51958]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [51958]
+INFO:     Started server process [52007]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:39188 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53024 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53026 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42192 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42206 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42220 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42222 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56946 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56936 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47512 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47522 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37510 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37512 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40842 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40850 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35276 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35268 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50850 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50838 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42740 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60422 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60438 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47024 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47014 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44816 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44830 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44964 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:33282 - "GET /robots.txt HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:47624 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47640 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47656 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47648 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33732 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33726 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52007]
+INFO:     Started server process [52430]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:56682 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47094 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47110 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47116 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47120 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41322 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41338 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41320 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47474 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51798 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57086 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37262 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43816 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39580 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59566 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55144 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49920 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56026 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38468 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33222 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50010 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56720 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38390 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45764 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51336 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51344 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51786 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38716 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53626 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56964 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38784 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55854 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33768 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53078 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33830 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:33844 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33860 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33880 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33872 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52430]
+INFO:     Started server process [53155]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:318: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:36036 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57154 - "GET /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:48652 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33308 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52468 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53982 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48630 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54234 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50262 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41938 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53376 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40682 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56280 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48246 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59210 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59226 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59236 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59242 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59258 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59266 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38674 - "GET /admin/config.php HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:40580 - "GET /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:51908 - "GET /.continue/config.json HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:49370 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41336 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41350 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34820 - "GET /robots.txt HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:36172 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38658 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38666 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38670 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38676 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40290 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:51788 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55874 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39534 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33928 - "GET /.env HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     152.32.180.86:55850 - "GET / HTTP/1.1" 200 OK
+INFO:     152.32.180.86:45292 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45302 - "GET /robots.txt HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45308 - "GET /sitemap.xml HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45320 - "GET /config.json HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45334 - "GET /sse HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45344 - "GET /mcp HTTP/1.1" 404 Not Found
+INFO:     152.32.180.86:45360 - "GET /mcp-sse HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58658 - "GET /robots.txt HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:42258 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33076 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:36342 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36350 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36354 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36360 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36374 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36390 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36402 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36412 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36426 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36434 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36446 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36458 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58828 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41064 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:55212 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44564 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47922 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45608 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45616 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41102 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35462 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46374 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46376 - "OPTIONS /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46380 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37652 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37654 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33282 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54978 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54986 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38356 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38364 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52298 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33290 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36696 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55716 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54966 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54972 - "POST /ai-prediction HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44204 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60420 - "POST /ai-prediction HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51594 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51074 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52950 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52966 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52968 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52972 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52982 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38410 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38426 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38440 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38452 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38466 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38472 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38486 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38494 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47288 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47302 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34314 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34316 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34332 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34334 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34340 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34416 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34426 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34434 - "OPTIONS /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34442 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34458 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34470 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34478 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34482 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55248 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54794 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54802 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54804 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54808 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54810 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54814 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54824 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45538 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39426 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39220 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33200 - "OPTIONS /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33214 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45924 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34976 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43202 - "OPTIONS /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43206 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35904 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37412 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37418 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56960 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56964 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52934 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40312 - "OPTIONS /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40318 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40322 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40326 - "POST /kundali HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37068 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40732 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33792 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45734 - "OPTIONS /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45748 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40498 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59660 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37332 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37346 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54268 - "OPTIONS /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54284 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47502 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51108 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37700 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42826 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42840 - "POST /muhurat HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57518 - "OPTIONS /ai-prediction HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57532 - "POST /ai-prediction HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60562 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54444 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:54452 - "POST / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:47188 - "GET /robots.txt HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:52528 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38062 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46540 - "GET /robots.txt HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:46542 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46558 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46560 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46572 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41736 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41738 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58844 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59330 - "POST /panchang HTTP/1.0" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     127.0.0.1:42054 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59682 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     71.6.134.232:54218 - "GET / HTTP/1.1" 200 OK
+INFO:     71.6.134.232:36952 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53936 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42176 - "GET /version HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:57592 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     167.71.86.247:33830 - "GET / HTTP/1.1" 200 OK
+INFO:     167.71.86.247:33832 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     205.210.31.165:58084 - "GET / HTTP/1.1" 200 OK
+INFO:     45.205.1.26:56644 - "POST / HTTP/1.1" 405 Method Not Allowed
+INFO:     45.205.1.26:56648 - "POST /_next HTTP/1.1" 404 Not Found
+INFO:     45.205.1.26:56654 - "POST /api HTTP/1.1" 404 Not Found
+INFO:     45.205.1.26:56664 - "POST /_next/server HTTP/1.1" 404 Not Found
+INFO:     45.205.1.26:56680 - "POST /app HTTP/1.1" 404 Not Found
+INFO:     45.205.1.26:56692 - "POST /api/route HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59102 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46374 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:58962 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57188 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:54644 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54660 - "GET /favicon.ico HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:48072 - "GET /eventmanager HTTP/1.0" 404 Not Found
+INFO:     195.178.110.204:59588 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37152 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42982 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39218 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45374 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     157.230.4.72:54538 - "GET / HTTP/1.1" 200 OK
+INFO:     157.230.4.72:54550 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57550 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:51880 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57830 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48978 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51130 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36868 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36878 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59384 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59370 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55744 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39516 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39526 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60988 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60716 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52996 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60704 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46910 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51044 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59862 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33990 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49348 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34324 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45182 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35134 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35150 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35154 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35152 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57016 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57036 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57042 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57024 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37854 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37882 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37870 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33812 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33350 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33366 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59804 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60560 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33980 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47418 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:38036 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48088 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56216 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56930 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55024 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59790 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51924 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40904 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49466 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45806 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59398 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35406 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41604 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33456 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53552 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47140 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47146 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33130 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:46720 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:52364 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35818 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49090 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49098 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49092 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41136 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41158 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41150 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:44690 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57114 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:49482 - "GET /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:46714 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:36132 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:48760 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:33958 - "GET / HTTP/1.0" 200 OK
+INFO:     212.73.148.9:38756 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35780 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35784 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35786 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35788 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49512 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49526 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49530 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49542 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:53436 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:43314 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57886 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58758 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59748 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53980 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34736 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36208 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35402 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59668 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40764 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35154 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48436 - "POST /auto-rashifal HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48724 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37682 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55214 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55228 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55256 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55242 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54330 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36906 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49300 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49316 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49338 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49324 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33166 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33178 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33180 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51084 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51102 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40788 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40774 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:40798 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59036 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59028 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59050 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58590 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58582 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58592 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43246 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43254 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43244 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47164 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47186 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47178 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54832 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49134 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54840 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54838 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59850 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     127.0.0.1:59846 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59858 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42380 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39832 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39840 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39834 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33718 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42814 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42826 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42830 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59730 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59742 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59738 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36564 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55294 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55310 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55290 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36732 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36744 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36740 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:39786 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33572 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:33600 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:57216 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50698 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50714 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50866 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50878 - "OPTIONS /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50910 - "POST /auto-rashifal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55074 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:58232 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:58248 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51864 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51874 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51892 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51886 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51896 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51906 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41842 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41854 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41862 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41870 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41574 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35524 - "GET /.env HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:35538 - "POST / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:60308 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54852 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54854 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48662 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48664 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48676 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48684 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48696 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48708 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42140 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42142 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42146 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56276 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36938 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36946 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36962 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36970 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36984 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:37000 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54532 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54542 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54556 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:54572 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48374 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:48386 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43706 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59228 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59230 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59246 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59260 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59264 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59280 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59270 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59278 - "OPTIONS /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59292 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59302 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34828 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34842 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36798 - "GET /SDK/webLanguage HTTP/1.0" 404 Not Found
+INFO:     139.59.110.183:50368 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46366 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41770 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41772 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:56956 - "POST /panchang HTTP/1.0" 200 OK
+INFO:     127.0.0.1:35114 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:36512 - "PROPFIND / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:58156 - "GET /cdn-cgi/trace HTTP/1.0" 404 Not Found
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [53155]
+INFO:     Started server process [61359]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+/root/jyotish-api/main.py:569: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     127.0.0.1:48536 - "POST /weekly-trading-outlook HTTP/1.0" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     66.132.172.219:5350 - "GET / HTTP/1.1" 200 OK
+WARNING:  Invalid HTTP request received.
+INFO:     66.132.172.219:32500 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+INFO:     66.132.172.219:11082 - "GET /login HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60360 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60372 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42608 - "OPTIONS /weekly-trading-outlook HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42618 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42626 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59326 - "OPTIONS /weekly-trading-outlook HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59328 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59346 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:59344 - "POST /weekly-trading-outlook HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34262 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34276 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51470 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51474 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41638 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:41652 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43680 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:43682 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51340 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51344 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51348 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:51350 - "POST /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60208 - "OPTIONS /gochar HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60222 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60228 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:60230 - "POST /gochar HTTP/1.0" 200 OK
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     206.221.176.60:49272 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49300 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49286 - "GET / HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49272 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49314 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49320 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49332 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     64.62.156.94:39140 - "GET / HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49300 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49272 - "GET / HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49286 - "GET /docs HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49312 - "GET /openapi.yaml HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49314 - "GET /swagger.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49320 - "GET /.well-known/ai-plugin.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49272 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49286 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39674 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39664 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39682 - "GET /health HTTP/1.1" 200 OK
+INFO:     206.221.176.60:49300 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /api/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49314 - "GET /graphql HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49272 - "GET /api/system HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49286 - "GET /api/v1/info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /.env.local HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45180 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45164 - "GET /env HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45186 - "GET /.env HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49272 - "GET /tools HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49286 - "GET /.env.production HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49314 - "GET /api/tools HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49272 - "GET /api/flows HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /server_info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45164 - "GET /config HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45190 - "GET /env.js HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45206 - "GET /debug/vars HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49286 - "GET /config.js HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45204 - "GET /_debug HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49314 - "GET /api/v1/tools HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /settings HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:45220 - "GET /output_schema HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53458 - "GET /messages HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53466 - "GET /invoke HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /rest/workflows HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /api/agents HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53480 - "GET /ui HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53488 - "GET /api/runs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53490 - "GET /api/workflows HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /tools/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /v1/meta HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53506 - "GET /resources/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /v1/schema HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /api/v1/public-chatflows HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53490 - "GET /api/v1/chatflows HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /team/info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53506 - "GET /ui/model_hub_table/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52620 - "GET /model/info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52612 - "GET /health/liveliness HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /api/gallery HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /v1/nodes HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53490 - "GET /assistants HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53506 - "GET /console/api/system-features HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52640 - "GET /api/v1/collections HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52624 - "GET /discover HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52636 - "GET /rest/settings HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /console/api/setup HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /v1/agents HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /v1/tools HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52652 - "GET /assistants/search HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53490 - "GET /api/common/system/getInitData HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53506 - "GET /api/v1/chat/db/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52624 - "GET /api/v1/chat/dialogue/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52666 - "GET /v1/playground/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53474 - "GET /api/version/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /api/options/config HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49312 - "GET /user/login/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52652 - "GET /api/conversations HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56036 - "GET /api/profile HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56046 - "GET /api/models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /api/v1/pieces HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /.well-known/agent-ui.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56078 - "GET /static/agui.html HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56062 - "GET /api/v1/flags HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56088 - "GET /agent HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53504 - "GET /ap/v1/agent/tasks HTTP/1.1" 404 Not Found
+INFO:     64.62.156.104:27921 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56096 - "GET /chat HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52226 - "GET /agent/tasks HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56062 - "GET /redoc HTTP/1.1" 200 OK
+INFO:     206.221.176.60:53504 - "GET /api/chat HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56088 - "GET /_next/data HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52242 - "GET /api/agent HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52260 - "GET /v1/playground HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:52258 - "GET /api/sessions HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     206.221.176.60:39196 - "GET /api/summarize HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39208 - "GET /summarize HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39184 - "GET /generate HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     206.221.176.60:39212 - "GET /playground HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39214 - "GET /api/analyze HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39222 - "GET /api/_status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39184 - "GET /api/agent/tasks HTTP/1.1" 404 Not Found
+INFO:     104.243.35.104:38526 - "GET / HTTP/1.1" 200 OK
+INFO:     104.243.35.104:38532 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     104.243.35.104:38536 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.104:38546 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39230 - "GET /_admin/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39246 - "GET /analyze HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:39232 - "GET /api/v1/me HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46830 - "GET /api/classify HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46820 - "GET /workflows HTTP/1.1" 404 Not Found
+INFO:     64.62.156.94:41211 - "GET /?format=json HTTP/1.1" 200 OK
+INFO:     206.221.176.60:46842 - "GET /pipelines HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/v1/executions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46868 - "GET /api/trpc HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46882 - "GET /extract HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46884 - "GET /api/v1/bots HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46904 - "GET /api/webhooks HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46888 - "GET /api/recommend HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46868 - "GET /api/v1/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/query HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46882 - "GET /api/documents HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46842 - "GET /version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49128 - "GET /api/search HTTP/1.1" 404 Not Found
+WARNING:  Unsupported upgrade request.
+WARNING:  No supported WebSocket library detected. Please use "pip install 'uvicorn[standard]'", or install 'websockets' or 'wsproto' manually.
+WARNING:  Invalid HTTP request received.
+INFO:     206.221.176.60:46856 - "GET /api/manage/connector HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49144 - "GET /api/v1/workspace HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49168 - "GET /_api/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49158 - "GET /model HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49178 - "GET /api/server/about HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49174 - "GET /api/task HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /health-check HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/v1/actions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49144 - "GET /info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /api/v2/server/about HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58326 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58338 - "GET /api/experiment HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58348 - "GET /info/main/logs.html HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58358 - "GET /api/v1/workers HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/v1/checks HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49144 - "GET /v1/messages HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58364 - "GET /api/v1/apps HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/v1/master HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /api/v2.13/server.info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58390 - "GET /api/v2.20/server.info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58376 - "GET /api/v1/connections HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58380 - "GET /api/test-runs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58394 - "GET /api/v1/recognition/faces HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /play HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /copilot_internal/v2/token HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58414 - "GET /?query=SELECT+1 HTTP/1.1" 200 OK
+INFO:     206.221.176.60:58408 - "GET /console/api/apps HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /api/tts HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /console/api/workspaces/current/tool-providers HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /api/tasks HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58422 - "GET /healthz HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44166 - "GET /api/parameters HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /_cluster/settings HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /feature_store.yaml HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /v1/internal/model/info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58414 - "GET /v1/chat/completions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58408 - "GET /list_models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44176 - "GET /api/v1/models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46856 - "GET /api/v1/nodes HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49186 - "GET /get_model_list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58422 - "GET /v1/images/generations HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44178 - "GET /v1/scrape HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /v1/audio/transcriptions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44182 - "GET /worker_get_status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44176 - "GET /v1/completions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /api/health/ready HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53322 - "GET /api/server-info/ping HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53328 - "GET /api/v1/info/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /api HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53344 - "GET /ai/models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53352 - "GET /api/server-info/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53358 - "GET /ai HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:58400 - "GET /v2/models HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53322 - "GET /api/search?query=ai HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53328 - "GET /rest/v1/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53368 - "GET /.well-known/kong HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53372 - "GET /rest/v1/devices HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53358 - "GET /documents HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53352 - "GET /api/v1/app/config HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53374 - "GET /v2 HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53380 - "GET /guards HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53392 - "GET /api/v1/app/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53404 - "GET /pipeline/apis/v2beta1/pipelines HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53322 - "GET /api/kernelspecs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53352 - "GET /lab HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53322 - "GET /hub/login HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46034 - "GET /dashboard HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46018 - "GET /api/config/types HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53352 - "GET /api/v1/runs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46040 - "GET /api/v1/model HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:53322 - "GET /apis/kubeflow.org HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /api/v1/namespaces HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50102 - "GET /api/v1/sessions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50120 - "GET /swagger/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50130 - "GET /api/v1/table HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50114 - "GET /apis HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50146 - "GET /v1/embeddings HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /api/public/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50150 - "GET /api/v1/components HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50102 - "GET /slots HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50164 - "GET /threads HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50178 - "GET /v1/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50190 - "GET /languages HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50172 - "GET /stream HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /zuqu3 HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50150 - "GET /v1/chat/interactive HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /v2/vectordb/collections/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50164 - "GET /api/handlers HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50172 - "GET /indexes HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50150 - "GET /api/home HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51842 - "GET /api/kernel/status HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51832 - "GET /v1/vector/collections HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /ajax-api/2.0/mlflow/experiments/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50164 - "GET /mj/submit/imagine HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50150 - "GET /api/botstate HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51844 - "GET /messages/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51860 - "GET /v1/memories HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51852 - "GET /api/2.0/mlflow/experiments/list HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /openapi/swagger/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51874 - "GET /v2/repository/index HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51884 - "GET /models/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /v1/rails/configs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56934 - "GET /api/db/connect HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56948 - "GET /api/channel HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56964 - "GET /run HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:46042 - "GET /v1/assistants HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51874 - "GET /api/backend/v1/version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:51884 - "GET /v1/threads HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56968 - "GET /db/data/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56984 - "GET /api/leaderboard/v1/attributes/search HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56990 - "GET /api/openapi.json HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:57024 - "GET /ufmRest/app/ufm_version HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:57008 - "GET /v3/api-docs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56992 - "GET /v1/health/ready HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56968 - "GET /api/show HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50566 - "GET /api/ps HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56968 - "GET /_cat/plugins HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50578 - "GET /api/export-auth HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50586 - "GET /public/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50594 - "GET /_cluster/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50592 - "GET /web/login HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50610 - "GET /v1/ingest HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50566 - "GET /v1/chunks HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50578 - "GET /api/results HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50566 - "GET /v1/traces HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50566 - "GET /collections HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:50578 - "GET /infer HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56500 - "GET /api/v1/orgs HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56538 - "GET /sdapi/v1/cmd-flags HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56516 - "GET /api/brain HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56524 - "GET /api/v1/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56556 - "GET /sdapi/v1/options HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:56550 - "GET /v1/api/datasets HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:33260 - "GET /nodes HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:33246 - "GET /api/serve/deployments HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59934 - "GET /prometheus HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59932 - "GET /_stcore/health HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59926 - "GET /api/v1.0/predictions HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59944 - "GET /_stcore/host-config HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:33260 - "GET /get_model_info HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59960 - "GET /get_server_args HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59958 - "GET /v1/models/metadata HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:33246 - "GET /data/plugins/listing HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59966 - "GET /_stcore/stream HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59964 - "GET /api/skills HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59932 - "GET /api/v1/services HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59926 - "GET /api/v1/chat HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59934 - "GET /api-description HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:59944 - "GET /api/settings/get HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49630 - "GET /api/typebots HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49644 - "GET /predict HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49682 - "GET /api/messages HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49648 - "GET /healthcheck HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49660 - "GET /chat/api/messages HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:49670 - "GET /ui/ HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44386 - "GET /state/v1 HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44394 - "GET /studio_speakers HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44420 - "GET /api/v1/viewer HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44372 - "GET /v1/model_registrations/LLM HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44398 - "GET /ApplicationStatus HTTP/1.1" 404 Not Found
+INFO:     206.221.176.60:44404 - "GET /search/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:47034 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34096 - "POST / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:34108 - "OPTIONS /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34114 - "POST /trading-signal HTTP/1.0" 200 OK
+INFO:     127.0.0.1:34124 - "POST / HTTP/1.0" 405 Method Not Allowed
+INFO:     127.0.0.1:55004 - "GET /WuEL HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:55008 - "GET /a HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:42342 - "GET /download/file.ext HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:42348 - "GET /SiteLoader HTTP/1.0" 404 Not Found
+INFO:     127.0.0.1:34846 - "GET /mPlayer HTTP/1.0" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     104.243.35.92:57004 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:56992 - "GET / HTTP/1.1" 200 OK
+INFO:     104.243.35.92:57012 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:57022 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:57038 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:57040 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:47222 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     104.243.35.92:47232 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     209.222.101.194:57748 - "GET / HTTP/1.1" 200 OK
+INFO:     209.222.101.194:57760 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57780 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57776 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57804 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57792 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57808 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57812 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57780 - "GET /docs HTTP/1.1" 200 OK
+INFO:     209.222.101.194:57804 - "GET /openapi.yaml HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57776 - "GET / HTTP/1.1" 200 OK
+INFO:     209.222.101.194:57792 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     209.222.101.194:57808 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57812 - "GET /health HTTP/1.1" 200 OK
+INFO:     209.222.101.194:57776 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57712 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57780 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57722 - "GET /api/health HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57804 - "GET /api/system HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57792 - "GET /api/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /mcp HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57712 - "GET /tools HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57776 - "GET /api/tools HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57740 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57734 - "GET /api/v1/auth HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57746 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57780 - "GET /api/flows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /server_info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57792 - "GET /graphql HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57804 - "GET /api/v1/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /_debug HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39482 - "GET /env.js HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39476 - "GET /.env.production HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39486 - "GET /debug/vars HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /settings HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /sse HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /messages HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /invoke HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/v1/flows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/runs HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /api/agents HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /rest/workflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /api/v1/tools HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/traces HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /resources/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /v1/meta HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/v1/heartbeat HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /v1/schema HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /api/workflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /tools/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /health/liveliness HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /model/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /ui HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /key/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /team/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /ui/model_hub_table/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /market HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /discover HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /api/v1/collections HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /console/api/system-features HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /console/api/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /console/api/setup HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/v1/public-chatflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/v1/flags HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53380 - "GET /v1/nodes HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /api/v1/chatflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /api/profile HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /.well-known/agent-ui.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /static/agui.html HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /chat HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /agent HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /rest/settings HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /ap/v1/agent/tasks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/gallery HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /api/trpc/public.checkUpdate HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /assistants HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /assistants/search HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/agent HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /agent/tasks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /v1/agents HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /v1/tools HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/sessions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /v1/playground/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /v1/playground HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/crews HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /api/common/system/getInitData HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /_next/data HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/version/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/chat HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /redoc HTTP/1.1" 200 OK
+INFO:     209.222.101.194:39490 - "GET /user/login/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /api/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/providers HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /.well-known/serviceinfo HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/generate HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /generate HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /sign HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /v1/conversation/create HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/v1/chat/dialogue/scenes HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /api/v1/chat/dialogue/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /v1/workflow/run HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /api/v1/chat/db/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /api/options/config HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /sdapi/v1/sd-models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/conversations HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /internal/sysinfo HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/v1/pieces HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /api/summarize HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /summarize HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/analyze HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /analyze HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/classify HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /api/extract HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /classify HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /api/search HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /extract HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/recommend HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/query HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/documents HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /playground HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /pipelines HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/pipelines HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /workflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/v1/executions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /api/webhooks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /automation HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /api/projects HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /api/v1/workspace HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/v1/health HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /model HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /_api/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /api/v1/me HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/_status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /api/agent/tasks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /_admin/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /openai/deployments?api-version=2024-02-01 HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /openai/models?api-version=2024-02-01 HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /api/trpc HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /api/v1/bots HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/predict HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/task HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /api/v1/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /_chainlit/config HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /v1/messages HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /api/v2.13/server.info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /api/v2.20/server.info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /play HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /ping HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /?query=SELECT+1 HTTP/1.1" 200 OK
+INFO:     209.222.101.194:39544 - "GET /health-check HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/experiment HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /api/v1/actions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:57700 - "GET /api/v1/apps HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39504 - "GET /api/v1/connections HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39520 - "GET /api/v1/recognition/faces HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39528 - "GET /v1/engines/copilot-codex/completions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53434 - "GET /api/tts HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39552 - "GET /copilot_internal/v2/token HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39490 - "GET /healthz HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39542 - "GET /api/tasks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39532 - "GET /v1/engines HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39544 - "GET /api/server/about HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:39564 - "GET /api/v2/server/about HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53428 - "GET /api/manage/connector HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58160 - "GET /api/v1/master HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58116 - "GET /info/main/logs.html HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58104 - "GET /api/manage/document-set HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58126 - "GET /api/v1/workers HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58146 - "GET /api/test-runs HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58140 - "GET /api/v1/checks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33744 - "GET /list_models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33710 - "GET /_cat/indices HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33736 - "GET /v1/internal/model/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33724 - "GET /_ml/trained_models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33704 - "GET /api/v1/inference HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33726 - "GET /_cluster/settings HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33760 - "GET /login HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33770 - "GET /v1/completions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33750 - "GET /worker_get_status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33756 - "GET /v1/audio/transcriptions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33772 - "GET /get-online-features HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33754 - "GET /get_model_list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33776 - "GET /api/v1/projects HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33814 - "GET /api/contents HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33798 - "GET /gradio_api/info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33782 - "GET /console HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33808 - "GET /api/kernels HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:33816 - "GET /api/2.0/mlflow/experiments/search HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:42018 - "GET /v1/collections HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:42002 - "GET /collections HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:41988 - "GET /ajax-api/2.0/mlflow/experiments/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:42000 - "GET /-/metrics HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:42022 - "GET /api/v2/testing HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:42028 - "GET /api/dashboard/cluster HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53778 - "GET /api/datasources HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53788 - "GET /guards HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53792 - "GET /documents HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53762 - "GET /api/health/ready HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53786 - "GET /api/search?query=ai HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53774 - "GET /api HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53806 - "GET /v1/request HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53794 - "GET /query HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53832 - "GET /api/server-info/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53826 - "GET /api/server-info/ping HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53816 - "GET /dashboard HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53808 - "GET /v1/log/request HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47730 - "GET /hub/login HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47716 - "GET /lab HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47728 - "GET /hub/api HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47770 - "GET /api/extra/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47744 - "GET /api/config/types HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47756 - "GET /api/v1/model HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     209.222.101.194:47784 - "GET /ai HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47806 - "GET /.well-known/kong HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47796 - "GET /ai/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47810 - "GET /v2/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47778 - "GET /api/v1/info/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:47812 - "GET /v2 HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48876 - "GET /api/v1/table HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48844 - "GET /api/v1/namespaces HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48838 - "GET /pipeline/apis/v2beta1/pipelines HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48852 - "GET /apis HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48850 - "GET /apis/kubeflow.org HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48868 - "GET /swagger/ HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53578 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53564 - "GET / HTTP/1.1" 200 OK
+INFO:     104.243.32.126:53584 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53592 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53606 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53596 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48886 - "GET /v1/embeddings HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48922 - "GET /stream HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48928 - "GET /api/v1/runs HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48898 - "GET /api/public/health HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48890 - "GET /api/v1/components HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:48912 - "GET /threads HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53632 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     104.243.32.126:53622 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51800 - "GET /lmstudio/diagnostics HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51832 - "GET /api/home HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51848 - "GET /indexes HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51810 - "GET /manifest.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51816 - "GET /api/kernel/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51784 - "GET /v1/chat/interactive HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51850 - "GET /api/mcp HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51866 - "GET /v1/memories HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51870 - "GET /api/botstate HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51874 - "GET /mj/submit/imagine HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51860 - "GET /messages/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:51876 - "GET /mj/task/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59454 - "GET /api/v1/workflows HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59442 - "GET /models/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59428 - "GET /v2/repository/index HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59420 - "GET /api/2.0/mlflow/registered-models/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59446 - "GET /openapi/swagger/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59462 - "GET /api/v1/credentials HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59454 - "GET /ufmRest/app/ufm_version HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59442 - "GET /api/channel HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59428 - "GET /v1/health/ready HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59420 - "GET /api/show HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59462 - "GET /api/v1/predict HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59446 - "GET /api/ps HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59474 - "GET /run HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59508 - "GET /v1/threads HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59510 - "GET /api/openapi.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59484 - "GET /api/voices HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59512 - "GET /v3/api-docs HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:59498 - "GET /v1/assistants HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58732 - "GET /GeneralModelService/inference HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58770 - "GET /api/v1/orgs HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58748 - "GET /api/v1/config HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58730 - "GET /api/v1/functions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58754 - "GET /api/v1/versions HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58738 - "GET /v1/traces HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58796 - "GET /v1/ingest HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58828 - "GET /api/results HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58784 - "GET /public/ HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58812 - "GET /api/v1/query?query=ai_request_count HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58806 - "GET /api/v1/label/__name__/values HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:58804 - "GET /v1/chunks HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37796 - "GET /telemetry HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37824 - "GET /v1/api/datasets HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37784 - "GET /qanything HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37806 - "GET /api/brain HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37776 - "GET /api/v1/participants HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37818 - "GET /api/v1/ HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     209.222.101.194:37926 - "GET /api/serve/deployments HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37908 - "GET /api/cluster_status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37940 - "GET /module/list HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37936 - "GET /nodes HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37920 - "GET /api/serve/applications HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37898 - "GET /v1/api/chats HTTP/1.1" 404 Not Found
+WARNING:  Invalid HTTP request received.
+WARNING:  Invalid HTTP request received.
+INFO:     209.222.101.194:37944 - "GET /model/registry HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37958 - "GET /sdapi/v1/cmd-flags HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37950 - "GET /infer HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37968 - "GET /sdapi/v1/options HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37970 - "GET /sdapi/v1/samplers HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35308 - "GET /sdapi/v1/memory HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37342 - "GET /api/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37332 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37320 - "GET / HTTP/1.1" 200 OK
+INFO:     104.243.35.94:37340 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37944 - "GET /api/v1/services HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35340 - "GET /get_server_args HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35326 - "GET /get_model_info HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35320 - "GET /prometheus HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35324 - "GET /api/skills HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35312 - "GET /api/v1.0/predictions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37366 - "GET /metrics HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37950 - "GET /api/settings/get HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37354 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37944 - "GET /api/deployments HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35308 - "GET /api/translate HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60788 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37372 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37944 - "GET /data/plugins/listing HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:37950 - "GET /v1/models/metadata HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37354 - "GET /queue/status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37366 - "GET / HTTP/1.1" 200 OK
+INFO:     209.222.101.194:35344 - "GET /_stcore/health HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35356 - "GET /_stcore/stream HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35362 - "GET /api/v1/chat HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:35352 - "GET /_stcore/host-config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60788 - "GET /docs HTTP/1.1" 200 OK
+INFO:     104.243.35.94:37372 - "GET /api/status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37366 - "GET /.well-known/ai-plugin.json HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     104.243.35.94:60790 - "GET /api/system HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60814 - "GET /api/v1/auth HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60822 - "GET /openapi.yaml HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53350 - "GET /api-description HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53352 - "GET /api/score HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60788 - "GET /api/tags HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:37372 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53366 - "GET /api/v1/screen HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53376 - "GET /search HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53386 - "GET /embeddings HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53394 - "GET /api/typebots HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60814 - "GET /config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /tools HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60790 - "GET /config.js HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60822 - "GET /api/tools HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53398 - "GET /healthcheck HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42418 - "GET /_debug HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42414 - "GET /.well-known/mcp.json HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:53406 - "GET /api/messages HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42426 - "GET /.well-known/agent.json HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60814 - "GET /mcp HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /settings HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60790 - "GET /api/flows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60822 - "GET /sse HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42454 - "GET /api/config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42438 - "GET /output_schema HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /api/v1/info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60790 - "GET /input_schema HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42470 - "GET /server_info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42482 - "GET /messages HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42476 - "GET /graphql HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50238 - "GET /api/v1/system HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50240 - "GET /v1/.well-known/ready HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50258 - "GET /inference HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50244 - "GET /v1/.well-known/live HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50266 - "GET /v1/model_registrations/LLM HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /.env.local HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60790 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50618 - "GET /.env HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50608 - "GET /api/v1/flows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50628 - "GET /env HTTP/1.1" 404 Not Found
+INFO:     209.222.101.194:50278 - "GET /studio_speakers HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42470 - "GET /api/v1/tools HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42482 - "GET /api/traces HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42476 - "GET /market HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50636 - "GET /rest/workflows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /api/agents HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50608 - "GET /discover HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60790 - "GET /api/v1/collections HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50638 - "GET /env.js HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50652 - "GET /api/runs HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:42470 - "GET /api/workflows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50636 - "GET /v1/nodes HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50608 - "GET /api/v1/heartbeat HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /console/api/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50636 - "GET /api/v1/public-chatflows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /model/info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50608 - "GET /api/trpc/public.checkUpdate HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50636 - "GET /key/info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45640 - "GET /ui HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45634 - "GET /api/v1/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45642 - "GET /rest/settings HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45622 - "GET /health/liveliness HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:60800 - "GET /assistants HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:50608 - "GET /team/info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35656 - "GET /api/gallery HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45642 - "GET /v1/tools HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45622 - "GET /api/crews HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35670 - "GET /assistants/search HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35668 - "GET /ui/model_hub_table/ HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35672 - "GET /v1/agents HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45642 - "GET /api/version/ HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35694 - "GET /internal/sysinfo HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35708 - "GET /api/models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35700 - "GET /api/v1/flags HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35702 - "GET /.well-known/agent-ui.json HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:45642 - "GET /sign HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:35694 - "GET /api/v1/chat/dialogue/list HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /v1/workflow/run HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /v1/conversation/create HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32830 - "GET /api/v1/chat/dialogue/scenes HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32842 - "GET /api/options/config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32832 - "GET /api/v1/chat/db/list HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /ap/v1/agent/tasks HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /api/analyze HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32876 - "GET /agent HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /api/summarize HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /chat HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32830 - "GET /agent/tasks HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32832 - "GET /analyze HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32896 - "GET /summarize HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /api/classify HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /api/agent HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /v1/playground HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /extract HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58232 - "GET /api/chain HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58242 - "GET /api/sessions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58248 - "GET /api/extract HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /api/query HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /api/search HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /_next/data HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /api/documents HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42990 - "POST /varga HTTP/1.0" 200 OK
+INFO:     104.243.35.94:32804 - "GET /api/generate HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58232 - "GET /api/pipelines HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58256 - "GET /models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58268 - "GET /api/providers HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /pipelines HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /api/v1/executions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58270 - "GET /playground HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /api/trpc HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58286 - "GET /workflows HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58268 - "GET /api/v1/bots HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58256 - "GET /api/webhooks HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58232 - "GET /api/projects HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57484 - "GET /automation HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /api/v1/health HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /_chainlit/config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58268 - "GET /api/v1/workspace HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58256 - "GET /api/v1/tenants/default_tenant HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32788 - "GET /model HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57498 - "GET /api/task HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /api/predict HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58232 - "GET /_api/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57484 - "GET /v1/messages HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32892 - "GET /api/v2.20/server.info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32880 - "GET /api/_status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58268 - "GET /api/v2.13/server.info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57506 - "GET /_admin/status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58256 - "GET /api/v1/me HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:32804 - "GET /play HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58232 - "GET /?query=SELECT+1 HTTP/1.1" 200 OK
+INFO:     104.243.35.94:57484 - "GET /openai/deployments?api-version=2024-02-01 HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57698 - "GET /ping HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57700 - "GET /openai/models?api-version=2024-02-01 HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57706 - "GET /api/v1/connections HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57742 - "GET /api/v1/master HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57730 - "GET /api/v1/recognition/faces HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57708 - "GET /api/test-runs HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57724 - "GET /v1/scrape HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57746 - "GET /api/v1/nodes HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57698 - "GET /v1/engines/copilot-codex/completions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57700 - "GET /api/v1/experiments HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57742 - "GET /healthz HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57746 - "GET /console/api/apps HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57784 - "GET /state HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57768 - "GET /copilot_internal/v2/token HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57754 - "GET /v1/images/generations HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57792 - "GET /api/tts HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57706 - "GET /api/tasks HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57730 - "GET /api/parameters HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57708 - "GET /v1/engines HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57724 - "GET /console/api/workspaces/current/tool-providers HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57698 - "GET /api/v1/models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57700 - "GET /api/server/about HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57742 - "GET /api/v2/server/about HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57768 - "GET /api/manage/connector HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57754 - "GET /_ml/trained_models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57784 - "GET /_cluster/settings HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57746 - "GET /_cat/indices HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57792 - "GET /api/manage/document-set HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57706 - "GET /api/v1/workers HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57698 - "GET /worker_get_status HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57730 - "GET /v1/internal/model/info HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57708 - "GET /info/main/logs.html HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57724 - "GET /list_models HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57700 - "GET /get_model_list HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57742 - "GET /login HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57784 - "GET /feature-service HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57768 - "GET /get-online-features HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57754 - "GET /v1/completions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57792 - "GET /feature_store.yaml HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57746 - "GET /v1/audio/transcriptions HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57742 - "GET /api/dashboard/cluster HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:57746 - "GET /rest/v1/health HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58166 - "GET /api/v1/app/version HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58186 - "GET /api/v1/app/config HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58194 - "GET /api HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58170 - "GET /api/health/ready HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58212 - "GET /api/search?query=ai HTTP/1.1" 404 Not Found
+INFO:     104.243.35.94:58198 - "GET /api/datasources HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:41162 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:42174 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:47874 - "GET / HTTP/1.0" 200 OK
+INFO:     127.0.0.1:55674 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:50930 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:45508 - "POST /varga HTTP/1.0" 200 OK
+INFO:     127.0.0.1:49874 - "POST /varga HTTP/1.0" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [61359]

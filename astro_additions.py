@@ -100,7 +100,9 @@ def get_jd(date_str: str, time_str: str = "00:00", tz: float = 5.5):
 def get_planet_positions(jd: float) -> dict:
     positions = {}
     for name, pid in PLANET_IDS.items():
-        res = swe.calc_ut(jd, pid)[0]
+        swe.set_ephe_path("/root/jyotish-api/ephe")
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        res = swe.calc_ut(jd, pid, swe.FLG_SIDEREAL|swe.FLG_SPEED)[0]
         lon = res[0]
         if name == 'Rahu':
             lon = lon % 360
@@ -365,6 +367,12 @@ def gochar_endpoint(req: GocharRequest):
         k: {'rashi': v['rashi'], 'nakshatra': v['nakshatra'], 'retrograde': v['retrograde']}
         for k, v in transit.items()
     }
+    try:
+        from astro_engine import get_gochar_phal_with_vedh
+        transit_lons = {k: v.get('longitude', v.get('degree', v.get('lon', 0))) for k, v in transit.items()}
+        result['gochar_phal'] = get_gochar_phal_with_vedh(req.moon_sign, transit_lons)
+    except Exception as ge:
+        result['gochar_phal'] = {"error": str(ge)}
     return result
 
 @router.post("/muhurat")

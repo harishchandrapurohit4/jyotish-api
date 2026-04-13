@@ -867,3 +867,121 @@ def get_gochar_phal(planet, bhav):
         "phal": phal,
         "shubh": shubh
     }
+
+def get_hora_lagna(jd, birth_time_hours, lat, lon):
+    """Parashari Hora Lagna — Sun se calculate"""
+    try:
+        import swisseph as swe
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        sun_lon = swe.calc_ut(jd, swe.SUN)[0][0]
+        ayanamsa = swe.get_ayanamsa_ut(jd)
+        sun_sid = (sun_lon - ayanamsa) % 360
+        # Hora Lagna = Sun lon + (birth time in hours * 30) % 360
+        hora_lon = (sun_sid + birth_time_hours * 30) % 360
+        hora_sign = int(hora_lon / 30)
+        hora_degree = hora_lon % 30
+        return {
+            'hora_lagna': RASHI_NAMES[hora_sign],
+            'hora_lagna_num': hora_sign + 1,
+            'hora_lagna_degree': round(hora_degree, 2),
+            'type': 'Parashari'
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def get_ghati_lagna(jd, sunrise_jd):
+    """Ghati Lagna — din ki ghati se calculate"""
+    try:
+        import swisseph as swe
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        # Ghati = time elapsed since sunrise in ghatis (1 ghati = 24 min)
+        time_elapsed_days = jd - sunrise_jd
+        ghatis = time_elapsed_days * 60  # 60 ghatis in a day
+        sun_lon = swe.calc_ut(jd, swe.SUN)[0][0]
+        ayanamsa = swe.get_ayanamsa_ut(jd)
+        sun_sid = (sun_lon - ayanamsa) % 360
+        ghati_lon = (sun_sid + ghatis * 6) % 360  # 6 degrees per ghati
+        ghati_sign = int(ghati_lon / 30)
+        ghati_degree = ghati_lon % 30
+        return {
+            'ghati_lagna': RASHI_NAMES[ghati_sign],
+            'ghati_lagna_num': ghati_sign + 1,
+            'ghati_lagna_degree': round(ghati_degree, 2)
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def get_bhava_lagna(jd, sunrise_jd):
+    """Bhava Lagna — ghati lagna se alag method"""
+    try:
+        import swisseph as swe
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        time_elapsed_days = jd - sunrise_jd
+        ghatis = time_elapsed_days * 60
+        sun_lon = swe.calc_ut(jd, swe.SUN)[0][0]
+        ayanamsa = swe.get_ayanamsa_ut(jd)
+        sun_sid = (sun_lon - ayanamsa) % 360
+        bhava_lon = (sun_sid + ghatis * 12) % 360  # 12 degrees per ghati
+        bhava_sign = int(bhava_lon / 30)
+        bhava_degree = bhava_lon % 30
+        return {
+            'bhava_lagna': RASHI_NAMES[bhava_sign],
+            'bhava_lagna_num': bhava_sign + 1,
+            'bhava_lagna_degree': round(bhava_degree, 2)
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def get_sree_lagna(moon_lon, asc_lon):
+    """Sree Lagna — Chandra aur Lagna se"""
+    try:
+        import swisseph as swe
+        # Sree Lagna = Lagna + (Moon lon - Lagna) mirrored
+        diff = (moon_lon - asc_lon) % 360
+        sree_lon = (asc_lon - diff) % 360
+        sree_sign = int(sree_lon / 30)
+        sree_degree = sree_lon % 30
+        return {
+            'sree_lagna': RASHI_NAMES[sree_sign],
+            'sree_lagna_num': sree_sign + 1,
+            'sree_lagna_degree': round(sree_degree, 2)
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def get_varnada_lagna(asc_num, hora_lagna_num):
+    """Jaimini Varnada Lagna"""
+    try:
+        # Varnada = Lagna + Hora Lagna from Aries (odd) or from Pisces (even)
+        asc_from_aries = asc_num  # 1-12
+        hora_from_aries = hora_lagna_num  # 1-12
+        if asc_num % 2 == 1:  # odd lagna
+            varnada_num = (asc_from_aries + hora_from_aries - 1) % 12
+        else:  # even lagna
+            varnada_num = (asc_from_aries - hora_from_aries + 1) % 12
+        if varnada_num == 0: varnada_num = 12
+        return {
+            'varnada_lagna': RASHI_NAMES[varnada_num - 1],
+            'varnada_lagna_num': varnada_num
+        }
+    except Exception as e:
+        return {'error': str(e)}
+
+def get_all_special_lagnas(jd, asc_lon, asc_num, moon_lon, sunrise_jd, birth_time_hours, lat, lon):
+    """Sabhi special lagnas ek saath"""
+    try:
+        hora = get_hora_lagna(jd, birth_time_hours, lat, lon)
+        ghati = get_ghati_lagna(jd, sunrise_jd)
+        bhava = get_bhava_lagna(jd, sunrise_jd)
+        sree = get_sree_lagna(moon_lon, asc_lon)
+        hora_num = hora.get('hora_lagna_num', 1)
+        varnada = get_varnada_lagna(asc_num, hora_num)
+        return {
+            'hora_lagna': hora,
+            'ghati_lagna': ghati,
+            'bhava_lagna': bhava,
+            'sree_lagna': sree,
+            'varnada_lagna': varnada,
+        }
+    except Exception as e:
+        return {'error': str(e)}

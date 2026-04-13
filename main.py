@@ -128,6 +128,122 @@ def birth_details(data: BirthData):
     except Exception as e:
         raise HTTPException(500, f'Calculation error: {str(e)}')
 
+
+# ═══ GRAHA AVASTHA ═══
+AVASTHA_NAMES = ['Shayan','Upaveshan','Netrapani','Prakashana','Gamana','Agamana','Samavaas','Aagam','Bhojan','Nritya','Kautuk','Nidra']
+GRAHA_NUM = {'Sun':1,'Moon':2,'Mars':3,'Mercury':4,'Jupiter':5,'Venus':6,'Saturn':7,'Rahu':8,'Ketu':9}
+ASTA_DEGREES = {'Moon':12,'Mars':17,'Mercury':14,'Jupiter':11,'Venus':10,'Saturn':15}
+UCCHA = {'Sun':'Mesh','Moon':'Vrishabh','Mars':'Makar','Mercury':'Kanya','Jupiter':'Kark','Venus':'Meen','Saturn':'Tula','Rahu':'Mithun','Ketu':'Dhanu'}
+NEECHA = {'Sun':'Tula','Moon':'Vrishchik','Mars':'Kark','Mercury':'Meen','Jupiter':'Makar','Venus':'Kanya','Saturn':'Mesh'}
+SWAGRUHI = {'Sun':['Simha'],'Moon':['Kark'],'Mars':['Mesh','Vrishchik'],'Mercury':['Mithun','Kanya'],'Jupiter':['Dhanu','Meen'],'Venus':['Vrishabh','Tula'],'Saturn':['Makar','Kumbh']}
+
+def get_baladi_avastha(degree_in_rashi, is_odd_rashi=True):
+    d = degree_in_rashi % 30
+    if is_odd_rashi:
+        if d < 6: return ('Baal', 25)
+        elif d < 12: return ('Kumar', 50)
+        elif d < 18: return ('Yuva', 100)
+        elif d < 24: return ('Vriddha', 75)
+        else: return ('Mrit', 0)
+    else:
+        if d < 6: return ('Mrit', 0)
+        elif d < 12: return ('Vriddha', 75)
+        elif d < 18: return ('Yuva', 100)
+        elif d < 24: return ('Kumar', 50)
+        else: return ('Baal', 25)
+
+def check_asta(planet_name, planet_lon, sun_lon):
+    if planet_name in ['Sun','Rahu','Ketu','Ascendant']: return False
+    diff = abs(planet_lon - sun_lon)
+    if diff > 180: diff = 360 - diff
+    return diff <= ASTA_DEGREES.get(planet_name, 15)
+
+def get_deeptadi_avastha(planet_name, rashi):
+    if UCCHA.get(planet_name) == rashi: return 'Deeept (Uccha)'
+    if NEECHA.get(planet_name) == rashi: return 'Khal (Neecha)'
+    if rashi in SWAGRUHI.get(planet_name, []): return 'Swastha (Swagruhi)'
+    return 'Shaant (Madhyam)'
+
+def get_shayanadi_avastha(nak_num, graha_name, navamsha_num, lagna_rashi_num, janma_nak_num):
+    try:
+        graha_num = GRAHA_NUM.get(graha_name, 1)
+        total = (nak_num * graha_num * navamsha_num) + lagna_rashi_num + janma_nak_num
+        shesha = total % 12
+        if shesha == 0: shesha = 12
+        return AVASTHA_NAMES[shesha - 1]
+    except: return 'Shayan'
+
+
+NAAM_AKSHAR_ANK = {'a':1,'aa':1,'i':2,'ii':2,'u':3,'uu':3,'e':4,'ai':4,'o':5,'au':5,'k':1,'kh':2,'g':3,'gh':4,'ch':5,'c':5,'j':2,'jh':3,'t':3,'th':4,'d':4,'dh':2,'n':2,'p':3,'ph':4,'f':4,'b':5,'bh':1,'m':2,'y':3,'r':4,'l':5,'v':1,'w':1,'sh':2,'s':4,'h':5,'ksh':1,'tr':4}
+GRAHA_DHRUVANK = {'Sun':5,'Moon':2,'Mars':2,'Mercury':3,'Jupiter':5,'Venus':3,'Saturn':3,'Rahu':0,'Ketu':0}
+SHAYANADI_PHAL_ALL = {
+'Sun':{'Shayan':'Apach, mandagni, pittashool, gupt rog, pair mein sujan','Upaveshan':'Karigar kaarya, garibi, vidyaheen, dukhi, doosron ka sevak','Netrapani':'5,9,7,10 bhaav — balwaan dhani. Anya bhaav — nishthur netrarogi','Prakashana':'Punyavaan, dharmic, dhani, daani, rajsi kul','Gamana':'Sadaiv pravas, rogyukt, nidra bhay krodhadi se yukt','Agamana':'Kroor, durbuddhi, kushal, dambhi, kanjoos, parastr mein rat','Samavaas':'Dharmic, dhani, anek vidyaaon se yukt, sundar netra, pavitra aacharan','Aagam':'Sadaiv dukhi, moorkh, kurup kintu dhani','Bhojan':'Stri putra dhan se rahit, jodo mein peeda, sir mein vishesh peeda','Nritya':'Pundit, sundar, vakvatur, shoolrogi, dharmic va dhani','Kautuk':'Utsaahi, mahan putra ka pita, daani, do patniyon wala','Nidra':'Sadaiv pravas, ling guda rogi, daridra, viklang, ati krodhi'},
+'Moon':{'Shayan':'Swabhimani, sardi se jaldi prabhavit, kamuk, dhannaashak','Upaveshan':'Rogi, nirdhana, chalaak, kanjoos, mand buddhi','Netrapani':'Bade rog wala, dusht, bahut bolne wala, chalaak, kukaarmi','Prakashana':'Dhani, lamba majboot sharir, kanjoos, teertha premi','Gamana':'Dhanhin, kroorkaarmi, netrogi, shoolrogi, bhayaatur','Agamana':'Swabhimani, pairo mein peeda, gupt paapi, deen, mayavi','Samavaas':'Daani, dharmic, rajpujya, dhani, vaahna sukhi','Aagam':'Vaachal, dharmic, krishnapaksh mein do patniyon wala','Bhojan':'Pushta bimb — sukhi dhani. Ksheen bimb — sarp jal bhay','Nritya':'Balwaan — taktatvar dhani bhogi. Ksheen — rogi durbala','Kautuk':'Dhani, bahut putron wala, daani, anek vidyaaon ka jignasu','Nidra':'Klesh uthaane wala, paapi, rogi, sarvatra maara maara phirta'},
+'Mars':{'Shayan':'Sharir par ghav, tvacha ke vividh rog. Lagnasth — pehli santan naash','Upaveshan':'Bahut nikrisht, dhani, kathor, nirdaya, paapi, rogi, viklang','Netrapani':'Lagna mein — netraheen, daridra. Anya — sharirik shithilta','Prakashana':'Dhani, jaldi tushtane wala, buddhimaan, baayein aankh mein chot','Gamana':'Sharir par ghav, stri se kalah, nirdhana, guda rogi','Agamana':'Dhani, aadar yukt, dharmik, prabhu kripa paatr','Samavaas':'Dharmik, adhik sampatti, uchvasth — bahut satva wala','Aagam':'Daksh dhani, bhogi, yash, swastha','Bhojan':'Mitha khane mein ruchi, apmaanit, mahakrodhi, ati utsaahi dhani','Nritya':'Rajpaksh se dhan labh, daani, bhogi, sukhi','Kautuk':'Mitron putron stri se yukt, anek sampattiyon wala, do patni','Nidra':'Dhanraihit, moorkh, mahakrodhi, neecharaagham'},
+'Mercury':{'Shayan':'Bhookh se peedit, lumpat, dhoorta','Upaveshan':'Vaagmi, gunvaan, kavya karne wala, pavitra aacharan','Netrapani':'Pairon mein rog, vidya vinay se heen, putra bhi nasht','Prakashana':'Daansheel, dhani, anek vidyaaon se yukt, vedaarth ka gyata','Gamana':'Kaaryakushal, adhik lalchi, stri ke vash mein, kamdukhi','Agamana':'Paapaacharan, neech sangati, do putron wala','Samavaas':'Dhani, dharmic, chirarogi, samarthan prapt karne wala','Aagam':'Paapaacharan, neech sangati se dhan, gupt sthaaon mein rog','Bhojan':'Vaad vivaad se dhanhaani, raja bhay, shir mein rog','Nritya':'Dhani, vidwaan, kavi, prasannachit, sukhi','Kautuk':'Sabka priya, sangeetgya, tvacha mein rog','Nidra':'Bada rog, alpayu, vaad-vivadi, dhanhaani'},
+'Jupiter':{'Shayan':'Kamzor swar, dukhi, atyadhik gora, lambi thuddi, shatruon se bhay','Upaveshan':'Dukhi, bahut bolne wala, muh haath pair mein ghav, rajbhay','Netrapani':'Shir mein rog, dhani, neech varn se priti, sangeet nritya premi','Prakashana':'Gunvaan, tejasvi, dhani. 1.10 mein — jagadguru athva raja','Gamana':'Paapi, laalchi, anek mitron wala, vidwaan, pravasik, dhani','Agamana':'Achhi patni wala, gunvaan, lokapriya','Samavaas':'Raja ka sevak ya sahyogi, vidwaan, sundar, kushal vakta dhani','Aagam':'Dharmik, shastraakar, naukr-chaakron va santan sukh yukt','Bhojan':'Maans bhakshan mein ruchi, dhani, kaamuk, santan ka sukh','Nritya':'Raja se sammaan, dhani, shaastragy, vyaakaran shastr ka gyata','Kautuk':'Dhani, apne kul mein agragany, ati aishwaryashali, shakti wala','Nidra':'Sab kaaryon mein moorkhta, garibi, ghar mein punay nahin'},
+'Venus':{'Shayan':'Bahut krodhi, dant rogi, nirdhana, bahut lumpat','Upaveshan':'Balwaan, dharmik, dhani, daayein bhaag mein ghav, jodo mein dard','Netrapani':'Netra nasht, 1.7.10 mein — atyadhik garibi va sarvanash','Prakashana':'Kaavyashastr va sangeet ka vidwaan, dhani, dharmic, vaahan yukt','Gamana':'Maata jeevit nahi, baalpan mein rog, apne logon ka viyog','Agamana':'Pairon mein rog, sadaiv utsaahit, bada kalaakaar, dhani','Samavaas':'Raja ka ati vishwaspaatr, sab kaaryon mein kushal, shoolrog','Aagam':'Dhanhaani, stri sukh mein bahut anugrah, bhay yukt','Bhojan':'Kam paachan shakti, doosron ki naukri, bahut dhan kamaane wala','Nritya':'Kushal vakta, vidwaan, kavi, dhani, kaamuk, swabhimani','Kautuk':'Anek prakaar ke sukhon se yukt, maha rikshta, prasann rahne wala','Nidra':'Doosron ki naukri, ninda, veer, adhik bolne wala, bechain'},
+'Saturn':{'Shayan':'Bhookh pyaas se peedit, ayushy prathm bhaag rogi, baad mein bhaagyavaan','Upaveshan':'Mote suze ya vaayuvikaar, daad aadi, rajpaksh se dhanhaani','Netrapani':'Moorakh hote hue bhi panditon ki tarah maany, dhani, dharmic','Prakashana':'Raja ka vishesh krupa paatr, dharmik, pandit, pavitra','Gamana':'Mahadhani, anek putron wala, pandit, gunvaan, shreshthi manushya','Agamana':'Pairon mein sujan, ati krodhi, kanjoos, par ninda karne wala','Samavaas':'Putra va dhan se yukt, seekhne padhne ko tatpar, anek ratnon se yukt','Aagam':'Lagna mein — bahut krodhi, rogi, saanp aadi sarispuon ke sambandh','Bhojan':'Apach, mandagni, bawaaseer, vayu shool, netrogi','Nritya':'Dhani, dharmic, vividh sampattiyon se yukt, sab sukh pane wala','Kautuk':'Raja ka vishwaspaatr, kaaryudaksh, dharmic, pandit','Nidra':'Dhani, vidwaan, pavitra aacharan, pittashool, do patniyon wala'},
+'Rahu':{'Shayan':'Sadaiv mahan dukh va klesh. Mithun Sinh Vrishabh mein — sab sukh','Upaveshan':'Pairon mein rog, daad tvacharog, dhanhaani, bahut ghamandi','Netrapani':'Aankhon mein rog, dushton serpaaon shatruon va choron ka bhay','Prakashana':'Dharmik, sadaiv desh videshon mein, utsaahi, saatvik, rajkarmachaari','Gamana':'Bahut santaanon wala, vidwaan, dhani, daani, rajmaanya','Agamana':'Krodhi, dhan va buddhi se rahit, chalaak, kanjoos, kaamuk','Samavaas':'Vidwaan, kanjoos, anek gunon wala, dharmic, dhan yukt','Aagam':'Sab prakaar ke dukhon se yukt, mitron bandhuo ka naash','Bhojan':'Bhojan mein mushkil, viklang, mand buddhi, stri putra sukh se rahit','Nritya':'Dhani, bahut putron wala, daani, pandit, pittashool','Kautuk':'Sab gunon se yukt, nana dhano se dhani','Nidra':'Jeevan mein bahut shok, stri putron ko paane wala, dhairyashali'},
+'Ketu':{'Shayan':'1.2.3.6 raashiyon mein dhanvarddhak. Anya raashiyon mein rogvarddhak','Upaveshan':'Tvacharogdayak, shatru raja chor aadi sarpdi ki shanka se peedit','Netrapani':'Netra mein rog, dushton sarpaadon se peedit, rajadi se peeda','Prakashana':'Dharmik, dhani, sadaiv pravas, utsaahi, rajsevak','Gamana':'Bahut putra, bahut dhan, vidwaan, gunvaan, daani','Agamana':'Anek rog, dhan ki haani, dant ghaati, mahaarogi, par nindak','Samavaas':'Vaachal, bahut garvita, dhoorta vidyaa visharad','Aagam':'Paap kaaryon mein agragany, bandhuo se vivaad, shatru rog peedit','Bhojan':'Sadaiv bhookh se peedit, daridra, rogi, maara maara phirta','Nritya':'Rog ke kaaran viklang, bahut palak jhapakne wali aankhein','Kautuk':'Apne star se gira hua, duraachari, dariddi, bhramak','Nidra':'Dhana dhaanya ka khub sukh, gunon va kalaaon se yukt hokar jeevan'},
+}
+
+def get_naam_akshar_ank(naam):
+    if not naam: return 1
+    naam = naam.lower().strip()
+    for akshar in sorted(NAAM_AKSHAR_ANK.keys(), key=len, reverse=True):
+        if naam.startswith(akshar):
+            return NAAM_AKSHAR_ANK[akshar]
+    return 1
+
+def get_naam_cheshta(avastha_name, graha_name, naam):
+    try:
+        avastha_num = AVASTHA_NAMES.index(avastha_name) + 1
+        naam_ank = get_naam_akshar_ank(naam)
+        dhruvank = GRAHA_DHRUVANK.get(graha_name, 3)
+        total = (avastha_num * avastha_num * naam_ank) + dhruvank
+        shesha = total % 12
+        final = shesha % 3
+        if final == 1: return 'Drishti (Madhyam Phal)'
+        elif final == 2: return 'Cheshta (Sampurna Phal)'
+        else: return 'Vicheeshta (Matra Phal)'
+    except: return 'Cheshta (Sampurna Phal)'
+
+def get_shayanadi_phal_with_naam(graha_avastha_result, naam=''):
+    enriched = {}
+    for planet, data in graha_avastha_result.items():
+        enriched[planet] = dict(data)
+        shayanadi = data.get('shayanadi', 'Shayan')
+        enriched[planet]['shayanadi_phal'] = SHAYANADI_PHAL_ALL.get(planet, {}).get(shayanadi, '')
+        if naam:
+            enriched[planet]['naam_cheshta'] = get_naam_cheshta(shayanadi, planet, naam)
+    return enriched
+
+def get_all_graha_avastha(planets_data, lagna_data, sun_lon):
+    result = {}
+    lagna_rashi_num = lagna_data.get('rashi_num', 1)
+    moon = planets_data.get('Moon', {})
+    janma_nak_num = moon.get('nakshatra_num', 1)
+    for name, p in planets_data.items():
+        if name == 'Ascendant': continue
+        degree = p.get('degree_in_rashi', 0)
+        rashi = p.get('rashi', 'Mesh')
+        rashi_num = p.get('rashi_num', 1)
+        nak_num = p.get('nakshatra_num', 1)
+        lon = p.get('longitude', 0)
+        nav_num = int((degree % 30) / (30/9)) + 1
+        is_odd = rashi_num % 2 == 1
+        baladi, phal_percent = get_baladi_avastha(degree, is_odd)
+        asta = check_asta(name, lon, sun_lon)
+        deeptadi = get_deeptadi_avastha(name, rashi)
+        shayanadi = get_shayanadi_avastha(nak_num, name, nav_num, lagna_rashi_num, janma_nak_num)
+        result[name] = {
+            'baladi': baladi, 'baladi_phal_percent': phal_percent,
+            'asta': asta, 'deeptadi': deeptadi, 'shayanadi': shayanadi,
+            'rashi': rashi, 'degree': round(degree, 2),
+        }
+    return result
+
 @app.post('/kundali')
 def kundali(data: BirthData):
     jd, birth_dt = parse_birth(data)
@@ -145,12 +261,32 @@ def kundali(data: BirthData):
         moon = planets['Moon']
         dasha = get_vimshottari_dasha(jd, moon['longitude'], birth_dt)
         
+        sun_lon = planets_with_houses.get('Sun', {}).get('longitude', 0)
+        graha_avastha_raw = get_all_graha_avastha(planets_with_houses, lagna, sun_lon)
+        # Special Lagnas
+        try:
+            from astro_engine import get_all_special_lagnas
+            import swisseph as swe
+            swe.set_sid_mode(swe.SIDM_LAHIRI)
+            birth_time_hours = int(data.tob.split(':')[0]) + int(data.tob.split(':')[1])/60
+            utc_offset = data.tz
+            birth_time_utc = birth_time_hours - utc_offset
+            sunrise_jd = jd - (birth_time_hours/24) + ((6 - utc_offset)/24)
+            moon_data = planets_with_houses.get('Moon', {})
+            moon_lon_sid = moon_data.get('longitude', 0)
+            asc_sid = lagna.get('longitude', 0)
+            asc_num = lagna.get('rashi_num', 1)
+            special_lagnas = get_all_special_lagnas(jd, asc_sid, asc_num, moon_lon_sid, sunrise_jd, birth_time_hours, data.lat, data.lon)
+        except Exception as e:
+            special_lagnas = {'error': str(e)}
+        naam = getattr(data, 'name', '') or ''
+        graha_avastha = get_shayanadi_phal_with_naam(graha_avastha_raw, naam)
         return {
             'name': data.name, 'dob': data.dob, 'tob': data.tob,
             'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
             'lagna': lagna, 'planets': planets_with_houses,
             'house_cusps': house_cusps, 'mangal_dosha': mangal,
-            'vimshottari_dasha': dasha
+            'vimshottari_dasha': dasha, 'graha_avastha': graha_avastha, 'special_lagnas': special_lagnas
         }
     except Exception as e:
         raise HTTPException(500, str(e))
@@ -531,6 +667,140 @@ RASHI_LORDS = {
   'Makar': 'Saturn', 'Kumbh': 'Saturn', 'Meen': 'Jupiter',
 }
 
+
+# ═══════════════════════════════════════
+# VARGA PHALADESH DICTIONARIES
+# ═══════════════════════════════════════
+
+HORA_PHAL = {
+  'Sun_hora': 'Surya Hora (Simha) — Purusha graha adhik. Dhan kamane mein mehnat, raj se labh, pitri sampatti.',
+  'Moon_hora': 'Chandra Hora (Kark) — Stri graha adhik. Maa se sampatti, vyapar mein safalta, griha sukh.',
+}
+
+DREKKANA_PHAL = {
+  'Mesh': 'Parakrami, sahasik, agresiv swabhav. Bhai-behen se sahyog.',
+  'Vrishabh': 'Dhani, kalapremi, sthir swabhav. Bhai-behen sukhi.',
+  'Mithun': 'Buddhiman, vaachaal, kaushal. Bhai-behen se maitri.',
+  'Kark': 'Bhaavuk, parivarik, caring. Bhai-behen se sneh.',
+  'Simha': 'Tejasvi, shahi, netritv shakti. Bhai-behen mein bada.',
+  'Kanya': 'Vyavharik, kushal, mehanti. Bhai-behen se sahyog.',
+  'Tula': 'Nyaypriy, kalatmak, santulit. Bhai-behen sukhi.',
+  'Vrishchik': 'Niddar, gehri soch, rahasyamayi. Bhai-behen se tanav.',
+  'Dhanu': 'Dharmik, gyanvan, udaar. Bhai-behen se prem.',
+  'Makar': 'Mehanti, anushasit, gambhir. Bhai-behen mein zimmedari.',
+  'Kumbh': 'Navachar, samajsevi, unique. Bhai-behen alag swabhav.',
+  'Meen': 'Sahisnu, kalpanasheel, aatmik. Bhai-behen se prem.',
+}
+
+SAPTAMSHA_PHAL = {
+  'Mesh': 'Santan sahasik, pratapshali. Pehli santan putra sambhav.',
+  'Vrishabh': 'Santan sundar, dhani, kalatmak. Sukhi santan.',
+  'Mithun': 'Santan buddhiman, vaachaal. Do santan sambhav.',
+  'Kark': 'Santan caring, sensitive. Maa se adhik lagav.',
+  'Simha': 'Santan tejasvi, rajyog. Prabhavshaali vyaktitv.',
+  'Kanya': 'Santan mehanti, kushal. Vyavsay mein safal.',
+  'Tula': 'Santan sundar, nyaypriy. Vivah sukhi.',
+  'Vrishchik': 'Santan niddar, intense. Gupt gyan mein ruchi.',
+  'Dhanu': 'Santan dharmik, gyanvan. Uchchi shiksha premi.',
+  'Makar': 'Santan mehanti, gambhir. Deri se santan sambhav.',
+  'Kumbh': 'Santan unique, navachar. Technology mein ruchi.',
+  'Meen': 'Santan aatmik, kalapremi. Adhyatm mein ruchi.',
+}
+
+DWADASHAMSHA_PHAL = {
+  'Mesh': 'Pita sahasik, mehanti. Pitri sampatti mein vivad sambhav.',
+  'Vrishabh': 'Mata sundar, dhani. Mata se griha sukh.',
+  'Mithun': 'Mata-pita buddhiman. Uchchi shiksha pradan.',
+  'Kark': 'Mata bahut caring, poshak. Mata se vishesh prem.',
+  'Simha': 'Pita pratapshali, rajyog. Pitri sampatti labh.',
+  'Kanya': 'Mata-pita vyavharik. Swasthya mein dhyan.',
+  'Tula': 'Mata sundar, nyaypriy. Sukhi parivar.',
+  'Vrishchik': 'Pita intense, niddar. Pitri sampatti mein kuch kasht.',
+  'Dhanu': 'Mata-pita dharmik, udaar. Dharmik parivar.',
+  'Makar': 'Pita mehanti, anushasit. Sampatti mein vridhi.',
+  'Kumbh': 'Mata-pita progressive. Alag soch wala parivar.',
+  'Meen': 'Mata bahut sahisnu, aatmik. Mata ka aashirvaad.',
+}
+
+TRISHAAMSHA_PHAL = {
+  'Mesh': 'Mangal Trishaamsha — Rog: Rakta vikar, chot, aagnay rog. Savdhan rahein.',
+  'Vrishabh': 'Shukra Trishaamsha — Rog: Mukh, gala, thyroid. Swabhav: Kaamukata.',
+  'Mithun': 'Shani Trishaamsha — Rog: Vaat, naadi rog. Vivah mein badhayein.',
+  'Kark': 'Budh Trishaamsha — Rog: Pet, manasik tanav. Careful rahein.',
+  'Simha': 'Shani Trishaamsha — Rog: Hriday, peeth. Anushasan zaroori.',
+  'Kanya': 'Budh Trishaamsha — Rog: Peth, antra. Shuddh aahar.',
+  'Tula': 'Shukra Trishaamsha — Rog: Kidney, mootra. Jal adhik piyen.',
+  'Vrishchik': 'Mangal Trishaamsha — Rog: Gupt ang, operations. Niddar.',
+  'Dhanu': 'Guru Trishaamsha — Rog: Kamar, jaangh. Vyayam zaroori.',
+  'Makar': 'Shani Trishaamsha — Rog: Ghutne, haddi. Calcium len.',
+  'Kumbh': 'Shani Trishaamsha — Rog: Paer, naadimandal. Yoga karen.',
+  'Meen': 'Guru Trishaamsha — Rog: Paer, kapha. Meditation zaroori.',
+}
+
+def get_varga_phaladesh(varga_results, lagna_vargas):
+    try:
+        result = {}
+        
+        # D2 Hora Phaladesh
+        sun_d2 = varga_results.get('Sun', {}).get('D2', {})
+        moon_d2 = varga_results.get('Moon', {}).get('D2', {})
+        sun_hora = sun_d2.get('sign', '')
+        moon_hora = moon_d2.get('sign', '')
+        sun_hora_count = sum(1 for p, v in varga_results.items() 
+                            if v.get('D2', {}).get('sign', '') in ['Simha', 'Mesh', 'Mithun', 'Tula', 'Dhanu', 'Kumbh'])
+        moon_hora_count = sum(1 for p, v in varga_results.items() 
+                             if v.get('D2', {}).get('sign', '') in ['Kark', 'Vrishabh', 'Kanya', 'Vrishchik', 'Makar', 'Meen'])
+        if sun_hora_count >= moon_hora_count:
+            hora_phal = HORA_PHAL['Sun_hora']
+        else:
+            hora_phal = HORA_PHAL['Moon_hora']
+        result['D2_hora'] = {
+            'sun_hora_planets': sun_hora_count,
+            'moon_hora_planets': moon_hora_count,
+            'phaladesh': hora_phal
+        }
+        
+        # D3 Drekkana Phaladesh
+        d3_lagna = lagna_vargas.get('D3', {})
+        d3_lagna_sign = d3_lagna.get('sign', 'Mesh')
+        result['D3_drekkana'] = {
+            'lagna': d3_lagna_sign,
+            'phaladesh': DREKKANA_PHAL.get(d3_lagna_sign, '')
+        }
+        
+        # D7 Saptamsha Phaladesh
+        d7_lagna = lagna_vargas.get('D7', {})
+        d7_lagna_sign = d7_lagna.get('sign', 'Mesh')
+        result['D7_saptamsha'] = {
+            'lagna': d7_lagna_sign,
+            'phaladesh': SAPTAMSHA_PHAL.get(d7_lagna_sign, '')
+        }
+        
+        # D12 Dwadashamsha Phaladesh
+        d12_lagna = lagna_vargas.get('D12', {})
+        d12_lagna_sign = d12_lagna.get('sign', 'Mesh')
+        result['D12_dwadashamsha'] = {
+            'lagna': d12_lagna_sign,
+            'phaladesh': DWADASHAMSHA_PHAL.get(d12_lagna_sign, '')
+        }
+        
+        # D30 Trishaamsha Phaladesh
+        d30_lagna = lagna_vargas.get('D30', {})
+        d30_lagna_sign = d30_lagna.get('sign', 'Mesh')
+        result['D30_trishaamsha'] = {
+            'lagna': d30_lagna_sign,
+            'phaladesh': TRISHAAMSHA_PHAL.get(d30_lagna_sign, '')
+        }
+        
+        return result
+    except Exception as e:
+        return {'error': str(e)}
+
+
+def get_swamsha_lagna(varga_results, karkamsha_sign):
+    # Swamsha = D9 chart with AK rashi as lagna
+    # karkamsha_sign already calculated from /varga
+    return {'swamsha_lagna': karkamsha_sign, 'note': 'Graha D9 ke anusaar, Lagna AK ki Navamsha rashi'}
 def get_navamsha_analysis(planets_data, lagna_vargas):
     try:
         d9_lagna = lagna_vargas.get('D9', {}) if isinstance(lagna_vargas, dict) else {}
@@ -612,7 +882,7 @@ def get_varga_charts(data: dict):
         asc_sid = (cusps[0] - ayanamsa) % 360
         lagna_vargas = get_all_vargas(asc_sid)
         navamsha_analysis = get_navamsha_analysis(varga_results, lagna_vargas)
-        return {'varga_charts': varga_results, 'lagna_vargas': lagna_vargas, 'karkamsha_lagna': karkamsha, 'pada_lagna': pada, 'upapada_lagna': upapada, 'navamsha_analysis': navamsha_analysis}
+        swamsha = get_swamsha_lagna(varga_results, karkamsha.get('karkamsha_lagna') if isinstance(karkamsha, dict) else karkamsha); return {'varga_charts': varga_results, 'lagna_vargas': lagna_vargas, 'karkamsha_lagna': karkamsha, 'pada_lagna': pada, 'upapada_lagna': upapada, 'navamsha_analysis': navamsha_analysis, 'varga_phaladesh': get_varga_phaladesh(varga_results, lagna_vargas), 'swamsha_lagna': swamsha}
     except Exception as e:
         raise HTTPException(500, str(e))
 

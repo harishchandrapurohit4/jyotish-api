@@ -1,4 +1,5 @@
 from astro_additions import router as astro_router
+from avakhada import get_avakhada
 
 import math as _math
 
@@ -369,6 +370,7 @@ def get_pranapada(sun_longitude, ishtkal_hours):
     except Exception as e:
         return {'error': str(e)}
 
+
 def get_aprakashit_grahas(sun_longitude):
     try:
         # 1. Dhoom = Sun + 4°13'20" = Sun + 4.2222°
@@ -516,6 +518,10 @@ def kundali(data: BirthData):
         ayanamsa = swe.get_ayanamsa_ut(jd)
         sun_lon_sid = (sun_lon_tropical - ayanamsa + ayanamsa) % 360
         aprakashit = get_aprakashit_grahas(sun_lon_sid)
+        moon_lon_sid = planets_with_houses.get("Moon",{}).get("longitude",0) % 360
+        lagna_trop = planets_with_houses.get("Lagna",{}).get("longitude", lagna.get("degree",0) if isinstance(lagna,dict) else 0)
+        lagna_lon_sid = (float(str(lagna_trop).replace("°","").split("d")[0]) if lagna_trop else 0)
+        avakhada = get_avakhada(moon_lon_sid, lagna_lon_sid, sun_lon_sid)
         import datetime
         dob_parts = data.dob.split('-')
         birth_dt = datetime.date(int(dob_parts[0]), int(dob_parts[1]), int(dob_parts[2]))
@@ -533,7 +539,7 @@ def kundali(data: BirthData):
             'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
             'lagna': lagna, 'planets': planets_with_houses,
             'house_cusps': house_cusps, 'mangal_dosha': mangal,
-            'vimshottari_dasha': dasha, 'graha_avastha': graha_avastha, 'special_lagnas': special_lagnas, 'aprakashit_grahas': aprakashit, 'gulik': gulik, 'pranapada': pranapada, 'shadbala': calculate_shadbala_all({p.lower(): {'lon': planets[p]['longitude'], 'house': planets[p].get('house',1)} for p in planets if p.lower() in ['sun','moon','mars','mercury','jupiter','venus','saturn']}, 0, 6, 18, planets.get('moon',{}).get('longitude',0), planets.get('sun',{}).get('longitude',0))
+            'vimshottari_dasha': dasha, 'graha_avastha': graha_avastha, 'special_lagnas': special_lagnas, 'aprakashit_grahas': aprakashit, 'gulik': gulik, 'pranapada': pranapada, 'avakhada': avakhada, 'shadbala': calculate_shadbala_all({p.lower(): {'lon': planets[p]['longitude'], 'house': planets[p].get('house',1)} for p in planets if p.lower() in ['sun','moon','mars','mercury','jupiter','venus','saturn']}, 0, 6, 18, planets.get('moon',{}).get('longitude',0), planets.get('sun',{}).get('longitude',0))
         }
     except Exception as e:
         raise HTTPException(500, str(e))

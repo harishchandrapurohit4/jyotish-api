@@ -1,5 +1,5 @@
-from astro_additions import os
-import router as astro_router
+import os
+from astro_additions import router as astro_router
 from avakhada import get_avakhada
 
 import math as _math

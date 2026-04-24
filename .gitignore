@@ -1,9 +1,39 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
-*.bak
-*.bak.*
-*.before-*
-.env
+*.pyd
+*.so
+.Python
+
+# Virtual environments — NEVER commit these
 venv/
+env/
+ENV/
+.venv/
+
+# Environment files — SECRETS
+.env
+.env.local
+.env.production
+*.key
+secrets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
+logs/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/

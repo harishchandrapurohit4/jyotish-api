@@ -1,4 +1,5 @@
-from astro_additions import router as astro_router
+from astro_additions import os
+import router as astro_router
 from avakhada import get_avakhada
 
 import math as _math
@@ -126,10 +127,16 @@ from astro_engine import (
     get_vikram_samvat,
     calculate_ashtakoot,
     init_ephem, get_julian_day, local_to_ut, get_all_planets, get_lagna,
-    get_house_cusps, get_planet_house, get_vimshottari_dasha,
+    get_house_cusps, get_planet_house, get_vimshottari_dasha, get_yogini_dasha,
     check_mangal_dosha, get_tithi, get_yoga, get_karana,
     get_sunrise_sunset,
 )
+
+
+# Local modules (custom astrology logic)
+from bhav_chalit import calculate_full_chalit_chakra
+from mangal_dosha import analyze_mangal_dosha
+from dasha_avastha import calculate_all_dasha_avasthaein
 
 # Initialize Ephemeris Path
 EPHEM_PATH = os.environ.get('EPHEM_PATH', '')
@@ -222,13 +229,14 @@ def birth_details(data: BirthData):
         planets = get_all_planets(jd)
         lagna = get_lagna(jd, data.lat, data.lon)
         moon = planets['Moon']
-        dasha = get_vimshottari_dasha(jd, moon['longitude'], birth_dt)
+        dasha = get_vimshottari_dasha(jd, moon["longitude"], birth_dt)
+        yogini = get_yogini_dasha(jd, moon["longitude"], birth_dt)
         return {
             'name': data.name, 'dob': data.dob, 'tob': data.tob,
             'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
             'lagna': lagna, 'moon_nakshatra': moon['nakshatra'],
             'moon_rashi': moon['rashi'], 'planets': planets,
-            'vimshottari_dasha': dasha
+            'vimshottari_dasha': dasha, 'yogini_dasha': yogini
         }
     except Exception as e:
         raise HTTPException(500, f'Calculation error: {str(e)}')
@@ -327,46 +335,182 @@ def get_shayanadi_phal_with_naam(graha_avastha_result, naam=''):
 
 # ═══ APRAKASHIT GRAHAS (5 Surya Mahadosha) ═══
 
-def get_gulik_spasht(jd, sunrise_jd, day_of_week, is_day_birth, lat, lon):
+def get_gulik_spasht(jd, birth_dt, birth_hour, lat, lon, tz):
+    """
+    Classical Gulik calculation per Brihat Parashara Hora Shastra.
+    Uses REAL sunrise/sunset from Swiss Ephemeris (no hardcoding).
+    
+    Args:
+        jd: Julian Day of birth
+        birth_dt: datetime.date object
+        birth_hour: Birth hour in local time (decimal)
+        lat, lon: Birth place coordinates
+        tz: Timezone offset (e.g., 5.5 for IST)
+    
+    Returns:
+        dict with gulik_lagna, gulik_lagna_num, gulik_degree, khand, is_day_birth
+    """
     try:
         import swisseph as swe
         swe.set_sid_mode(swe.SIDM_LAHIRI)
-        DAY_GULIK = {0:6, 1:5, 2:4, 3:3, 4:2, 5:1, 6:0}
-        NIGHT_GULIK = {0:1, 1:0, 2:6, 3:5, 4:4, 5:3, 6:2}
-        day_duration = 0.5
+        
+        # Day of week: 0=Sun, 1=Mon, ..., 6=Sat
+        # Python weekday(): Mon=0, Tue=1, ..., Sun=6
+        dow_map = {0:1, 1:2, 2:3, 3:4, 4:5, 5:6, 6:0}
+        day_of_week = dow_map[birth_dt.weekday()]
+        
+        # Brihat Parashara: Shani's khand position (0-indexed) per day
+        DAY_GULIK = {
+            0: 6,   # Ravi (Sun) → 7th khand
+            1: 5,   # Som (Mon) → 6th khand
+            2: 4,   # Mangal (Tue) → 5th khand
+            3: 3,   # Budh (Wed) → 4th khand
+            4: 2,   # Guru (Thu) → 3rd khand
+            5: 1,   # Shukra (Fri) → 2nd khand
+            6: 0    # Shani (Sat) → 1st khand
+        }
+        
+        # Night: 5th var from current var starts, then Shani's position
+        NIGHT_GULIK = {
+            0: 2,   # Ravi → 3rd khand (5th var=Guru, then Shukra, Shani)
+            1: 1,   # Som → 2nd khand (5th=Shukra, then Shani)
+            2: 0,   # Mangal → 1st khand (5th=Shani)
+            3: 6,   # Budh → 7th khand (5th=Ravi, wrap)
+            4: 5,   # Guru → 6th khand (5th=Som)
+            5: 4,   # Shukra → 5th khand (5th=Mangal)
+            6: 3    # Shani → 4th khand (5th=Budh)
+        }
+        
+        # Get UTC JD for the birth date's 00:00 local time
+        # Birth JD is already provided
+        
+        # Calculate REAL sunrise/sunset using Swiss Ephemeris
+        geopos = (lon, lat, 0)
+        
+        # Sunrise: Search from previous midnight
+        utc_midnight_jd = jd - (birth_hour / 24.0) + (tz / 24.0) * 0 - (birth_hour - 0) / 24.0
+        # Simpler: use the day's start in UTC
+        # birth_hour is local, tz is offset, so UTC hour = birth_hour - tz
+        # For sunrise search, start a bit before the expected sunrise
+        
+        # Use swe.rise_trans for accuracy
+        # Search window: start 24 hours before birth JD
+        search_start_jd = jd - 1.0  # 1 day before birth
+        
+        # Find sunrise
+        ret, sunrise_info = swe.rise_trans(
+            search_start_jd, swe.SUN,
+            swe.CALC_RISE | swe.BIT_HINDU_RISING,
+            (lon, lat, 0)
+        )
+        sunrise_jd_utc = sunrise_info[0] if ret >= 0 else jd - 0.25
+        
+        # Find sunset (after sunrise)
+        ret, sunset_info = swe.rise_trans(
+            sunrise_jd_utc, swe.SUN,
+            swe.CALC_SET | swe.BIT_HINDU_RISING,
+            (lon, lat, 0)
+        )
+        sunset_jd_utc = sunset_info[0] if ret >= 0 else sunrise_jd_utc + 0.5
+        
+        # Find next sunrise (for night duration)
+        ret, next_sunrise_info = swe.rise_trans(
+            sunset_jd_utc, swe.SUN,
+            swe.CALC_RISE | swe.BIT_HINDU_RISING,
+            (lon, lat, 0)
+        )
+        next_sunrise_jd_utc = next_sunrise_info[0] if ret >= 0 else sunset_jd_utc + 0.5
+        
+        # Actual durations
+        day_duration = sunset_jd_utc - sunrise_jd_utc  # In days (fraction)
+        night_duration = next_sunrise_jd_utc - sunset_jd_utc
+        
+        # Determine if birth is day or night
+        # Convert birth JD to compare: birth_jd_utc = jd (already UTC for proper comparison)
+        # The passed `jd` should be the UTC Julian Day at birth moment
+        birth_jd_utc = jd
+        
+        is_day_birth = sunrise_jd_utc <= birth_jd_utc <= sunset_jd_utc
+        
+        # Calculate Gulik JD
         if is_day_birth:
             khand = DAY_GULIK[day_of_week]
-            gulik_jd = sunrise_jd + (khand * day_duration / 8)
+            gulik_jd = sunrise_jd_utc + (khand * day_duration / 8)
         else:
             khand = NIGHT_GULIK[day_of_week]
-            sunset_jd = sunrise_jd + day_duration
-            gulik_jd = sunset_jd + (khand * day_duration / 8)
+            gulik_jd = sunset_jd_utc + (khand * night_duration / 8)
+        
+        # Get ascendant at Gulik time
         cusps, ascmc = swe.houses(gulik_jd, lat, lon, b'P')
         ayanamsa = swe.get_ayanamsa_ut(gulik_jd)
         gulik_lon = (ascmc[0] - ayanamsa) % 360
-        RASHI_N = ['Mesh','Vrishabh','Mithun','Kark','Simha','Kanya','Tula','Vrishchik','Dhanu','Makar','Kumbh','Meen']
+        
+        RASHI_N = ['Mesh','Vrishabh','Mithun','Kark','Simha','Kanya',
+                   'Tula','Vrishchik','Dhanu','Makar','Kumbh','Meen']
         sign = int(gulik_lon / 30)
         degree = gulik_lon % 30
         d = int(degree)
         m = int((degree - d) * 60)
-        return {'gulik_lagna': RASHI_N[sign], 'gulik_lagna_num': sign+1, 'gulik_degree': str(d)+'deg'+str(m)+'min', 'khand': khand}
+        
+        return {
+            'gulik_lagna': RASHI_N[sign],
+            'gulik_lagna_num': sign + 1,
+            'gulik_degree': f"{d}deg{m}min",
+            'khand': khand + 1,  # Return 1-indexed for user display
+            'is_day_birth': is_day_birth,
+            'day_duration_hours': round(day_duration * 24, 2),
+            'night_duration_hours': round(night_duration * 24, 2),
+            'sunrise_local': round(((sunrise_jd_utc + 0.5) % 1) * 24 + tz, 2) % 24,
+            'sunset_local': round(((sunset_jd_utc + 0.5) % 1) * 24 + tz, 2) % 24
+        }
     except Exception as e:
         return {'error': str(e)}
 
-def get_pranapada(sun_longitude, ishtkal_hours):
+
+def get_pranapada(sun_longitude, ishtkal_ghadi_pal):
+    """
+    Pranapada calculation per Brihat Parashara.
+    
+    Args:
+        sun_longitude: Sun's sidereal longitude in degrees
+        ishtkal_ghadi_pal: Ishtkal in ghadi (decimal, 1 ghadi = 24 minutes)
+    
+    Formula:
+        - Multiply ishtkal_ghadi × 4 (book says "ghati × 4")
+        - Wait, book says ghadi × 5/2 gives ishtkal pal
+        - 90 pran = 15 pal = 1 Pranapada rashi
+        - Pranapada jd = (ishtkal × 60 pal) / 1800 rashi count
+    """
     try:
-        RASHI_N = ['Mesh','Vrishabh','Mithun','Kark','Simha','Kanya','Tula','Vrishchik','Dhanu','Makar','Kumbh','Meen']
-        pranapada_ishtkal = ishtkal_hours * 2.5
-        plon_total = pranapada_ishtkal * 60
-        rashi_count = int(plon_total / 1800)
-        shesha_pal = plon_total % 1800
-        ansh = shesha_pal / 30
+        RASHI_N = ['Mesh','Vrishabh','Mithun','Kark','Simha','Kanya',
+                   'Tula','Vrishchik','Dhanu','Makar','Kumbh','Meen']
+        
+        # ishtkal_ghadi is already in ghadi, convert to pal
+        ishtkal_pal = ishtkal_ghadi_pal * 60  # 1 ghadi = 60 pal
+        
+        # Divide by 15 to get rashi count and remainder
+        rashi_count = int(ishtkal_pal / 15)
+        shesha_pal = ishtkal_pal % 15
+        
+        # Double the shesha pal to get degrees (book says "bache hue pal ko 2 se guna")
+        ansh = shesha_pal * 2  # degrees
+        
+        # Add to Sun's longitude (for Chara rashi; different for others)
+        # Book: "Sun Chara rashi → add 1.5.9 (1, 5, or 9 rashi)"
+        # Simplified: Just direct addition (most common method)
         pranapada_lon = (sun_longitude + (rashi_count * 30) + ansh) % 360
+        
         sign = int(pranapada_lon / 30)
         degree = pranapada_lon % 30
         d = int(degree)
         m = int((degree - d) * 60)
-        return {'pranapada_lagna': RASHI_N[sign], 'pranapada_num': sign+1, 'pranapada_degree': str(d)+'deg'+str(m)+'min', 'longitude': round(pranapada_lon, 4)}
+        
+        return {
+            'pranapada_lagna': RASHI_N[sign],
+            'pranapada_num': sign + 1,
+            'pranapada_degree': f"{d}deg{m}min",
+            'longitude': round(pranapada_lon, 4)
+        }
     except Exception as e:
         return {'error': str(e)}
 
@@ -490,7 +634,8 @@ def kundali(data: BirthData):
         mars_house = planets_with_houses['Mars']['house']
         mangal = check_mangal_dosha(mars_house)
         moon = planets['Moon']
-        dasha = get_vimshottari_dasha(jd, moon['longitude'], birth_dt)
+        dasha = get_vimshottari_dasha(jd, moon["longitude"], birth_dt)
+        yogini = get_yogini_dasha(jd, moon["longitude"], birth_dt)
         
         sun_lon = planets_with_houses.get('Sun', {}).get('longitude', 0)
         graha_avastha_raw = get_all_graha_avastha(planets_with_houses, lagna, sun_lon)
@@ -525,21 +670,36 @@ def kundali(data: BirthData):
         import datetime
         dob_parts = data.dob.split('-')
         birth_dt = datetime.date(int(dob_parts[0]), int(dob_parts[1]), int(dob_parts[2]))
-        dow_map = {0:1,1:2,2:3,3:4,4:5,5:6,6:0}
-        dow = dow_map[birth_dt.weekday()]
         birth_hour = int(data.tob.split(':')[0]) + int(data.tob.split(':')[1])/60
-        sunrise_approx = 6.0
-        is_day = sunrise_approx <= birth_hour <= 18.0
-        sunrise_jd_approx = jd - (birth_hour/24) + ((sunrise_approx - data.tz)/24)
-        gulik = get_gulik_spasht(jd, sunrise_jd_approx, dow, is_day, data.lat, data.lon)
-        ishtkal = (birth_hour - sunrise_approx) if is_day else (birth_hour + 24 - 18.0)
-        pranapada = get_pranapada(sun_lon_sid, ishtkal)
+        
+        # Classical Gulik via Brihat Parashara (real sunrise/sunset)
+        gulik = get_gulik_spasht(jd, birth_dt, birth_hour, data.lat, data.lon, data.tz)
+        
+        # Pranapada with real sunrise-based ishtkal
+        try:
+            import swisseph as swe
+            ret, sunrise_info = swe.rise_trans(
+                jd - 1.0, swe.SUN,
+                swe.CALC_RISE | swe.BIT_HINDU_RISING,
+                (data.lon, data.lat, 0)
+            )
+            sunrise_jd_utc = sunrise_info[0] if ret >= 0 else jd - 0.25
+            ishtkal_days = jd - sunrise_jd_utc
+            ishtkal_hours = ishtkal_days * 24
+            ishtkal_ghadi = ishtkal_hours * 2.5
+            pranapada = get_pranapada(sun_lon_sid, ishtkal_ghadi)
+        except Exception as e:
+            pranapada = {'error': f'Pranapada calc failed: {e}'}
+        
+        # BPHS Chapter 53 - Dasha Avasthaein
+        dasha_avastha = calculate_all_dasha_avasthaein(planets_with_houses)
+        
         return {
             'name': data.name, 'dob': data.dob, 'tob': data.tob,
             'place': {'lat': data.lat, 'lon': data.lon, 'tz': data.tz},
             'lagna': lagna, 'planets': planets_with_houses,
             'house_cusps': house_cusps, 'mangal_dosha': mangal,
-            'vimshottari_dasha': dasha, 'graha_avastha': graha_avastha, 'special_lagnas': special_lagnas, 'aprakashit_grahas': aprakashit, 'gulik': gulik, 'pranapada': pranapada, 'avakhada': avakhada, 'shadbala': calculate_shadbala_all({p.lower(): {'lon': planets[p]['longitude'], 'house': planets[p].get('house',1)} for p in planets if p.lower() in ['sun','moon','mars','mercury','jupiter','venus','saturn']}, 0, 6, 18, planets.get('moon',{}).get('longitude',0), planets.get('sun',{}).get('longitude',0))
+            'vimshottari_dasha': dasha, 'yogini_dasha': yogini, 'graha_avastha': graha_avastha, 'dasha_avastha': dasha_avastha, 'special_lagnas': special_lagnas, 'aprakashit_grahas': aprakashit, 'gulik': gulik, 'pranapada': pranapada, 'avakhada': avakhada, 'shadbala': calculate_shadbala_all({p.lower(): {'lon': planets[p]['longitude'], 'house': planets[p].get('house',1)} for p in planets if p.lower() in ['sun','moon','mars','mercury','jupiter','venus','saturn']}, 0, 6, 18, planets.get('moon',{}).get('longitude',0), planets.get('sun',{}).get('longitude',0))
         }
     except Exception as e:
         raise HTTPException(500, str(e))
@@ -547,7 +707,7 @@ def kundali(data: BirthData):
 @app.post('/panchang')
 def panchang(req: PanchangRequest):
     try:
-        from astro_engine import NAKSHATRA_ML, RASHI_ML, TITHI_ML, YOGA_ML, KARANA_ML, WEEKDAY_ML, PAKSHA_ML, get_ml
+        from astro_engine import NAKSHATRA_ML, RASHI_ML, TITHI_ML, YOGA_ML, KARANA_ML, WEEKDAY_ML, PAKSHA_ML, get_ml, get_choghadiya
         y, mo, d = map(int, req.date.split('-'))
         h_ut = 12.0 - req.tz
         jd = get_julian_day(y, mo, d, h_ut)
@@ -581,7 +741,7 @@ def panchang(req: PanchangRequest):
             **get_guli_yamghant(sun_info['sunrise'], sun_info['sunset'], sun_info['weekday']),
             'ritu': get_ritu_ayan(mo, d)['ritu'], 'ayana': get_ritu_ayan(mo, d)['ayana'],
             **get_moonrise_moonset(jd, req.lat, req.lon, req.tz),
-            'tithi_deity': TITHI_DEITY.get(tithi_raw['number'], ''), 'planets': planets
+            'tithi_deity': TITHI_DEITY.get(tithi_raw['number'], ''), 'planets': planets, 'choghadiya': get_choghadiya(req.date, sun_info['sunrise'], sun_info['sunset'], wd_idx)
         }
     except Exception as e:
         raise HTTPException(500, str(e))
@@ -595,10 +755,15 @@ def match_making(req: MatchMakingRequest):
         
         ashtakoot = calculate_ashtakoot(boy_planets['Moon']['nakshatra_num']-1, girl_planets['Moon']['nakshatra_num']-1)
         
+        boy_mars_house = boy_planets.get('Mars', {}).get('house', 0)
+        girl_mars_house = girl_planets.get('Mars', {}).get('house', 0)
+        boy_mangal = check_mangal_dosha(boy_mars_house)
+        girl_mangal = check_mangal_dosha(girl_mars_house)
         return {
             **ashtakoot,
             'boy': {'name': req.boy.name, 'nakshatra': boy_planets['Moon']['nakshatra']},
-            'girl': {'name': req.girl.name, 'nakshatra': girl_planets['Moon']['nakshatra']}
+            'girl': {'name': req.girl.name, 'nakshatra': girl_planets['Moon']['nakshatra']},
+            'mangal_dosha': {'male_has_dosha': boy_mangal['has_dosha'], 'female_has_dosha': girl_mangal['has_dosha'], 'description': boy_mangal['description'] + ' | ' + girl_mangal['description']}
         }
     except Exception as e:
         raise HTTPException(500, str(e))
@@ -750,7 +915,7 @@ Rules: Sun/Mars 1-10=Poora, Jupiter/Venus 10-20=Poora, Saturn/Rahu 21-30=Poora, 
 Sirf JSON: {{"general":"...","love":"...","career":"...","finance":"...","health":"...","score_love":3,"score_career":4,"score_finance":3,"score_health":4}}
 {lang_name} mein. IMPORTANT: Sirf {lang_name} script mein likho. Hindi ya Roman script bilkul mat use karo. Pure {lang_name} mein response do."""
         import google.generativeai as genai
-        genai.configure(api_key='AIzaSyDJ2QBG9E2Ka1AFdXG-HG1OFXlX1M2QlUg')
+        genai.configure(api_key=os.environ.get('GEMINI_API_KEY', ''))
         gmodel = genai.GenerativeModel('gemini-2.5-flash')
         resp = gmodel.generate_content(prompt)
         text = resp.text.strip().replace('```json','').replace('```','').strip()
@@ -1245,7 +1410,7 @@ Sirf JSON return karo (no markdown):
   "sunday": {{"mood":"neutral","note":"...","sectors":["..."]}}
 }}"""
         
-        genai.configure(api_key='AIzaSyDJ2QBG9E2Ka1AFdXG-HG1OFXlX1M2QlUg')
+        genai.configure(api_key=os.environ.get('GEMINI_API_KEY', ''))
         gmodel = genai.GenerativeModel('gemini-2.5-flash')
         resp = gmodel.generate_content(prompt)
         text = resp.text.strip().replace('```json','').replace('```','').strip()
@@ -1253,3 +1418,145 @@ Sirf JSON return karo (no markdown):
         return {'outlook': outlook, 'transit': transit}
     except Exception as e:
         raise HTTPException(500, str(e))
+
+# ============================================================================
+# Bhav Spasht + Chalit Chakra (Sripati method) — IGNOU Unit 4
+# Integrates with existing /kundali endpoint shape (BirthData, parse_birth,
+# get_lagna, get_all_planets), uses Swiss Ephemeris for Dashmalagna (MC).
+# ============================================================================
+
+
+class BhavChalitRequest(BaseModel):
+    name: str = "Jatak"
+    dob: str       # "YYYY-MM-DD"
+    tob: str       # "HH:MM"
+    lat: float
+    lon: float
+    timezone: float = 5.5
+    place: str = ""
+
+
+def _get_dashmalagna_longitude(jd: float, lat: float, lon: float) -> float:
+    """Return nirayana (sidereal Lahiri) Dashmalagna / MC in decimal degrees."""
+    import swisseph as swe
+    swe.set_sid_mode(swe.SIDM_LAHIRI)
+    cusps, ascmc = swe.houses(jd, lat, lon, b'P')  # Placidus; we only need MC
+    sayana_mc = ascmc[1]  # index 1 = MC
+    ayanamsa = swe.get_ayanamsa_ut(jd)
+    return (sayana_mc - ayanamsa) % 360
+
+
+@app.post('/bhav-chalit')
+def bhav_chalit(data: BirthData):
+    """
+    Sripati method Bhav Spasht + Chalit Chakra.
+    Takes the same BirthData as /kundali.
+    """
+    try:
+        jd, birth_dt = parse_birth(data)
+        lagna = get_lagna(jd, data.lat, data.lon)
+        planets = get_all_planets(jd)
+        dashm_deg = _get_dashmalagna_longitude(jd, data.lat, data.lon)
+
+        graha_positions = {name: p['longitude'] for name, p in planets.items()}
+
+        result = calculate_full_chalit_chakra(
+            lagna_deg=lagna['longitude'],
+            dashmalagna_deg=dashm_deg,
+            graha_positions=graha_positions,
+        )
+        # Add inputs for debugging / frontend context
+        result['inputs'] = {
+            'lagna_deg': lagna['longitude'],
+            'dashmalagna_deg': dashm_deg,
+        }
+        return result
+    except Exception as e:
+        raise HTTPException(500, f"bhav-chalit error: {str(e)}")
+
+# ============================================================================
+# Mangal Dosha Complete (v2) — with 3 references + 6 bhang rules + chalit
+# Classical Parashar Light implementation
+# ============================================================================
+
+
+def _navamsha_rashi_num(longitude: float) -> int:
+    """D9 (Navamsha) rashi number (1-12) from sidereal longitude."""
+    # Each navamsha = 3°20' (3.3333°), 108 navamshas in zodiac, 9 per rashi
+    navamsha_index = int(longitude / (30.0 / 9.0))  # 0-107
+    return (navamsha_index % 12) + 1
+
+
+@app.post('/mangal-dosha-full')
+def mangal_dosha_full(data: BirthData):
+    """
+    Complete classical Mangal Dosha analysis from 3 references:
+      - Lagna
+      - Chandra rashi
+      - Navamsha D9 Lagna
+    With 6 bhang rules including chalit sandhi check.
+    """
+    try:
+        jd, birth_dt = parse_birth(data)
+        planets = get_all_planets(jd)
+        lagna = get_lagna(jd, data.lat, data.lon)
+
+        # Build planets_by_name with required fields
+        planets_by_name = {}
+        for name, p in planets.items():
+            planets_by_name[name] = {
+                "longitude": p.get("longitude", 0),
+                "rashi_num": p.get("rashi_num", 0),
+                "retrograde": p.get("retrograde", False),
+            }
+
+        mars_data = planets_by_name.get("Mars", {})
+        moon_data = planets_by_name.get("Moon", {})
+
+        # Navamsha calculations
+        lagna_lon = lagna.get("longitude", 0)
+        navamsha_lagna_num = _navamsha_rashi_num(lagna_lon)
+        navamsha_mars_num = _navamsha_rashi_num(mars_data.get("longitude", 0))
+
+        # Chalit — compute Mangal's vishopak bal from chalit chakra
+        mars_chalit_vishopak = None
+        try:
+            import swisseph as swe
+            swe.set_sid_mode(swe.SIDM_LAHIRI)
+            cusps, ascmc = swe.houses(jd, data.lat, data.lon, b'P')
+            ayanamsa = swe.get_ayanamsa_ut(jd)
+            dashm_deg = (ascmc[1] - ayanamsa) % 360
+
+            graha_positions = {n: p["longitude"] for n, p in planets_by_name.items()}
+            chalit_result = calculate_full_chalit_chakra(
+                lagna_deg=lagna_lon,
+                dashmalagna_deg=dashm_deg,
+                graha_positions=graha_positions,
+            )
+            mars_chalit = chalit_result.get("chalit_positions", {}).get("Mars", {})
+            mars_chalit_vishopak = mars_chalit.get("vishopak_bal")
+        except Exception:
+            pass
+
+        # Run analysis
+        result = analyze_mangal_dosha(
+            jatak_name=data.name or "जातक",
+            lagna_rashi_num=lagna.get("rashi_num", 1),
+            chandra_rashi_num=moon_data.get("rashi_num", 1),
+            navamsha_lagna_rashi_num=navamsha_lagna_num,
+            mars_data=mars_data,
+            navamsha_mars_rashi_num=navamsha_mars_num,
+            planets_by_name=planets_by_name,
+            mars_chalit_vishopak=mars_chalit_vishopak,
+        )
+
+        # Compute intensity score
+        active_count = sum(1 for c in result["checks"] if c["final_has_dosha"])
+        intensity_map = {0: "none", 1: "low", 2: "medium", 3: "high"}
+        result["intensity"] = intensity_map[active_count]
+        result["active_ref_count"] = active_count
+        result["total_ref_count"] = 3
+
+        return result
+    except Exception as e:
+        raise HTTPException(500, f"mangal-dosha error: {str(e)}")

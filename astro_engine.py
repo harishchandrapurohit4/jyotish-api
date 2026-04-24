@@ -985,3 +985,106 @@ def get_all_special_lagnas(jd, asc_lon, asc_num, moon_lon, sunrise_jd, birth_tim
         }
     except Exception as e:
         return {'error': str(e)}
+
+YOGINI_ORDER = ['Mangala','Pingala','Dhanya','Bhramari','Bhadrika','Ulka','Siddha','Sankata']
+YOGINI_PERIODS = {'Mangala':1,'Pingala':2,'Dhanya':3,'Bhramari':4,'Bhadrika':5,'Ulka':6,'Siddha':7,'Sankata':8}
+
+def get_yogini_dasha(jd, moon_lon, birth_date, tz=5.5):
+    nak_size = 360 / 27
+    nak_num = int(moon_lon / nak_size)
+    position_in_nak = moon_lon % nak_size
+    fraction_elapsed = round(position_in_nak / nak_size, 8)
+    start_idx = nak_num % 8
+    start_yogini = YOGINI_ORDER[start_idx]
+    remaining = round(YOGINI_PERIODS[start_yogini] * (1 - fraction_elapsed), 6)
+    dashas = []
+    birth_date_utc = birth_date - timedelta(hours=tz)
+    current_date = birth_date_utc
+    today = datetime.utcnow()
+    for i in range(8):
+        yogini = YOGINI_ORDER[(start_idx + i) % 8]
+        years = remaining if i == 0 else YOGINI_PERIODS[yogini]
+        days = years * 365.2425
+        end_date = current_date + timedelta(days=days)
+        is_current = current_date <= today <= end_date
+        antardashas = []
+        antar_start = current_date
+        for j in range(8):
+            antar_yogini = YOGINI_ORDER[(start_idx + i + j) % 8]
+            antar_years = (YOGINI_PERIODS[antar_yogini] * years) / 36
+            antar_days = antar_years * 365.2425
+            antar_end = antar_start + timedelta(days=antar_days)
+            antar_current = antar_start <= today <= antar_end
+            antardashas.append({'lord': antar_yogini, 'start': antar_start.strftime('%Y-%m-%d'), 'end': antar_end.strftime('%Y-%m-%d'), 'years': round(antar_years, 2), 'is_current': antar_current})
+            antar_start = antar_end
+        dashas.append({'lord': yogini, 'start': current_date.strftime('%Y-%m-%d'), 'end': end_date.strftime('%Y-%m-%d'), 'years': round(years, 2), 'antardashas': antardashas, 'is_current': is_current})
+        current_date = end_date
+    return {'dashas': dashas}
+
+CHOGHADIYA_NAMES = ['Udveg', 'Char', 'Labh', 'Amrit', 'Kaal', 'Shubh', 'Rog']
+CHOGHADIYA_TYPE = ['Ashubh', 'Shubh', 'Shubh', 'Shubh', 'Ashubh', 'Shubh', 'Ashubh']
+CHOGHADIYA_COLOR = ['red', 'green', 'green', 'green', 'red', 'green', 'red']
+
+# Day choghadiya order for each weekday (0=Sun, 1=Mon, ... 6=Sat)
+DAY_CHOGHADIYA = [
+    [4,5,3,6,2,1,0,4,5,3,6,2,1,0,4,5],  # Sun
+    [1,0,4,5,3,6,2,1,0,4,5,3,6,2,1,0],  # Mon
+    [5,3,6,2,1,0,4,5,3,6,2,1,0,4,5,3],  # Tue
+    [3,6,2,1,0,4,5,3,6,2,1,0,4,5,3,6],  # Wed
+    [6,2,1,0,4,5,3,6,2,1,0,4,5,3,6,2],  # Thu
+    [2,1,0,4,5,3,6,2,1,0,4,5,3,6,2,1],  # Fri
+    [0,4,5,3,6,2,1,0,4,5,3,6,2,1,0,4],  # Sat
+]
+
+def get_choghadiya(date_str, sunrise, sunset, weekday):
+    try:
+        from datetime import datetime, timedelta
+        def parse_time(t):
+            h, m = map(int, t.split(':'))
+            return h * 60 + m
+        
+        sr = parse_time(sunrise)
+        ss = parse_time(sunset)
+        day_dur = (ss - sr) / 8
+        night_dur = (24 * 60 - (ss - sr)) / 8
+        
+        wd = weekday % 7
+        day_order = DAY_CHOGHADIYA[wd]
+        
+        result = {'day': [], 'night': []}
+        
+        for i in range(8):
+            idx = day_order[i % 7]
+            start_min = sr + i * day_dur
+            end_min = start_min + day_dur
+            sh = int(start_min // 60)
+            sm = int(start_min % 60)
+            eh = int(end_min // 60)
+            em = int(end_min % 60)
+            result['day'].append({
+                'name': CHOGHADIYA_NAMES[idx],
+                'type': CHOGHADIYA_TYPE[idx],
+                'color': CHOGHADIYA_COLOR[idx],
+                'start': f'{sh:02d}:{sm:02d}',
+                'end': f'{eh:02d}:{em:02d}'
+            })
+        
+        for i in range(8):
+            idx = day_order[(i + 8) % 16 % 7]
+            start_min = ss + i * night_dur
+            end_min = start_min + night_dur
+            sh = int(start_min // 60) % 24
+            sm = int(start_min % 60)
+            eh = int(end_min // 60) % 24
+            em = int(end_min % 60)
+            result['night'].append({
+                'name': CHOGHADIYA_NAMES[idx],
+                'type': CHOGHADIYA_TYPE[idx],
+                'color': CHOGHADIYA_COLOR[idx],
+                'start': f'{sh:02d}:{sm:02d}',
+                'end': f'{eh:02d}:{em:02d}'
+            })
+        
+        return result
+    except:
+        return {'day': [], 'night': []}

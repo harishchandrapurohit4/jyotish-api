@@ -110,6 +110,7 @@ JyotishRishi Astrology API - Final Updated Version
 FastAPI + Swiss Ephemeris (pyswisseph)
 Fixes: CORS, City Search Blocking, Lat/Lon Updates
 """
+import swisseph as swe
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -143,6 +144,53 @@ EPHEM_PATH = os.environ.get('EPHEM_PATH', '')
 init_ephem(EPHEM_PATH)
 
 app = FastAPI(title='JyotishRishi Astrology API', version='1.1.0')
+
+
+# ============================================================================
+# DASHAKOOT MILAN integration
+# ============================================================================
+try:
+    from dashakoot_endpoint import install_dashakoot_endpoint
+    install_dashakoot_endpoint(app)
+    print("[OK] Dashakoot Milan endpoints loaded")
+except Exception as _dk_err:
+    print(f"[WARN] Dashakoot not loaded: {_dk_err}")
+
+
+
+# ============================================================================
+# /api/match-making endpoint (Uttar Bhartiya proxy)
+# ============================================================================
+try:
+    from match_making_endpoint import install_match_making_endpoint
+    install_match_making_endpoint(app)
+    print("[OK] /api/match-making endpoint loaded")
+except Exception as _mm_err:
+    print(f"[WARN] match-making not loaded: {_mm_err}")
+
+
+# ============================================================================
+# JANMA DOSH endpoint
+# ============================================================================
+try:
+    from janma_dosh_endpoint import install_endpoint as install_jd_endpoint
+    install_jd_endpoint(app)
+    print("[OK] Janma Dosh endpoint loaded")
+except Exception as _jd_err:
+    print(f"[WARN] Janma Dosh not loaded: {_jd_err}")
+
+
+# ============================================================================
+# DOSH DETECTION endpoint (10 classical doshas)
+# ============================================================================
+try:
+    from dosh_endpoint import install_endpoint as install_dosh_endpoint
+    install_dosh_endpoint(app)
+    print("[OK] Dosh detection endpoint loaded")
+except Exception as _de_err:
+    print(f"[WARN] Dosh detection not loaded: {_de_err}")
+
+
 
 # --- CRITICAL: CORS FIX FOR MACBOOK/CHROME ---
 # Yahan '*' ki jagah apne domain ko allow karna zyada secure hai
@@ -664,8 +712,7 @@ def kundali(data: BirthData):
         sun_lon_sid = (sun_lon_tropical - ayanamsa + ayanamsa) % 360
         aprakashit = get_aprakashit_grahas(sun_lon_sid)
         moon_lon_sid = planets_with_houses.get("Moon",{}).get("longitude",0) % 360
-        lagna_trop = planets_with_houses.get("Lagna",{}).get("longitude", lagna.get("degree",0) if isinstance(lagna,dict) else 0)
-        lagna_lon_sid = (float(str(lagna_trop).replace("°","").split("d")[0]) if lagna_trop else 0)
+        lagna_lon_sid = lagna.get("longitude", 0) % 360
         avakhada = get_avakhada(moon_lon_sid, lagna_lon_sid, sun_lon_sid)
         import datetime
         dob_parts = data.dob.split('-')
@@ -1560,3 +1607,400 @@ def mangal_dosha_full(data: BirthData):
         return result
     except Exception as e:
         raise HTTPException(500, f"mangal-dosha error: {str(e)}")
+
+
+# YOGAS DETECTION ENDPOINT
+from yogas_engine import detect_all_yogas
+import astro_engine as ae
+
+class YogasRequest(BaseModel):
+    date: str
+    time: str
+    latitude: float
+    longitude: float
+    timezone: float = 5.5
+
+@app.post('/yogas')
+def detect_yogas_endpoint(req: YogasRequest):
+    try:
+        parts = req.date.split('-')
+        year = int(parts[0])
+        month = int(parts[1])
+        day = int(parts[2])
+        time_parts = req.time.split(':')
+        hour = int(time_parts[0])
+        minute = int(time_parts[1])
+        year, month, day, ut_h = ae.local_to_ut(year, month, day, hour, minute, req.timezone)
+        jd = ae.get_julian_day(year, month, day, ut_h)
+        planets_data = ae.get_all_planets(jd)
+        lagna_lon = ae.get_lagna(jd, req.latitude, req.longitude)
+        lagna_rashi = lagna_lon['rashi_num']
+        chart = {
+            'lagna': {'rashi': lagna_rashi},
+            'planets': {}
+        }
+        for planet_name, planet_info in planets_data.items():
+            chart['planets'][planet_name] = {'rashi': planet_info['rashi_num']}
+        result = detect_all_yogas(chart)
+        result['lagna_rashi'] = lagna_rashi
+        return result
+    except Exception as e:
+        import traceback
+        return {
+            'error': str(e),
+            'traceback': traceback.format_exc()[:500],
+            'total_yogas': 0,
+            'detected_yogas': []
+        }
+
+
+# LIFE PREDICTIONS ENDPOINT
+from life_predictions_engine import calculate_all_life_areas
+from yogas_engine import detect_all_yogas as _detect_yogas
+
+class LifePredictionsRequest(BaseModel):
+    date: str
+    time: str
+    latitude: float
+    longitude: float
+    timezone: float = 5.5
+
+@app.post('/life-predictions')
+def life_predictions_endpoint(req: LifePredictionsRequest):
+    try:
+        parts = req.date.split('-')
+        year = int(parts[0])
+        month = int(parts[1])
+        day = int(parts[2])
+        time_parts = req.time.split(':')
+        hour = int(time_parts[0])
+        minute = int(time_parts[1])
+        
+        year, month, day, ut_h = ae.local_to_ut(year, month, day, hour, minute, req.timezone)
+        jd = ae.get_julian_day(year, month, day, ut_h)
+        planets_data = ae.get_all_planets(jd)
+        lagna_lon = ae.get_lagna(jd, req.latitude, req.longitude)
+        lagna_rashi = lagna_lon['rashi_num']
+        
+        # Build planets dict for life predictions
+        planets_dict = {}
+        for planet_name, planet_info in planets_data.items():
+            planets_dict[planet_name.lower()] = {'rashi': planet_info['rashi_num']}
+        
+        # Get yogas
+        chart = {
+            'lagna': {'rashi': lagna_rashi},
+            'planets': {}
+        }
+        for planet_name, planet_info in planets_data.items():
+            chart['planets'][planet_name] = {'rashi': planet_info['rashi_num']}
+        yogas_result = _detect_yogas(chart)
+        yogas_ids = [y.get('id', '') for y in yogas_result.get('detected_yogas', [])]
+        
+        # Calculate life areas
+        life_areas = calculate_all_life_areas(planets_dict, lagna_rashi, yogas_ids)
+        
+        return {
+            'success': True,
+            'lagna_rashi': lagna_rashi,
+            'yogas_count': len(yogas_ids),
+            'yogas_detected': yogas_ids,
+            'life_areas': life_areas
+        }
+    except Exception as e:
+        import traceback
+        return {
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc()[:500],
+            'life_areas': {}
+        }
+
+
+# ============================================
+# ASHTOTTARI DASHA ENDPOINT
+# ============================================
+class AshtottariRequest(BaseModel):
+    dob: str
+    tob: str
+    lat: float
+    lon: float
+    tz: float
+
+@app.post('/ashtottari-dasha')
+def ashtottari_endpoint(req: AshtottariRequest):
+    try:
+        from ashtottari import get_full_ashtottari
+        y, mo, d = map(int, req.dob.split('-'))
+        h, mi = map(int, req.tob.split(':'))
+        h_local = h + mi/60.0
+        h_ut = h_local - req.tz
+        jd = get_julian_day(y, mo, d, h_ut)
+        planets = get_all_planets(jd)
+        moon_data = planets.get('Moon', {})
+        sun_lon = planets['Sun']['longitude']
+        moon_lon = planets['Moon']['longitude']
+        tithi = get_tithi(sun_lon, moon_lon)
+        paksha = tithi.get('paksha', 'Shukla')
+        sun_info = get_sunrise_sunset(jd, req.lat, req.lon, req.tz)
+        sunrise_str = sun_info.get('sunrise', '06:00')
+        sunset_str = sun_info.get('sunset', '18:00')
+        def parse_hr(s):
+            try:
+                parts = s.split(':')
+                return int(parts[0]) + int(parts[1])/60.0
+            except:
+                return 6.0
+        sunrise_hr = parse_hr(sunrise_str)
+        sunset_hr = parse_hr(sunset_str)
+        result = get_full_ashtottari(
+            moon_data=moon_data,
+            birth_date_str=req.dob,
+            paksha=paksha,
+            birth_hour=h_local,
+            sunrise=sunrise_hr,
+            sunset=sunset_hr
+        )
+        result['birth_details'] = {
+            'date': req.dob,
+            'time': req.tob,
+            'paksha': paksha,
+            'sunrise': sunrise_str,
+            'sunset': sunset_str,
+            'is_day_birth': sunrise_hr <= h_local < sunset_hr
+        }
+        result['moon'] = {
+            'longitude': moon_data.get('longitude', 0),
+            'rashi': moon_data.get('rashi', ''),
+            'nakshatra': moon_data.get('nakshatra', ''),
+            'pada': moon_data.get('pada', 0)
+        }
+        return result
+    except Exception as e:
+        raise HTTPException(500, str(e))
+
+
+# ============================================
+# KAALCHAKRA DASHA ENDPOINT
+# ============================================
+class KaalchakraRequest(BaseModel):
+    dob: str
+    tob: str
+    lat: float
+    lon: float
+    tz: float
+
+@app.post('/kaalchakra-dasha')
+def kaalchakra_endpoint(req: KaalchakraRequest):
+    try:
+        from kaalchakra import get_full_kaalchakra
+        y, mo, d = map(int, req.dob.split('-'))
+        h, mi = map(int, req.tob.split(':'))
+        h_local = h + mi/60.0
+        h_ut = h_local - req.tz
+        jd = get_julian_day(y, mo, d, h_ut)
+        planets = get_all_planets(jd)
+        moon_data = planets.get('Moon', {})
+        result = get_full_kaalchakra(
+            moon_data=moon_data,
+            birth_date_str=req.dob
+        )
+        result['birth_details'] = {
+            'date': req.dob,
+            'time': req.tob,
+            'location': {'lat': req.lat, 'lon': req.lon, 'tz': req.tz}
+        }
+        result['moon'] = {
+            'longitude': moon_data.get('longitude', 0),
+            'rashi': moon_data.get('rashi', ''),
+            'nakshatra': moon_data.get('nakshatra', ''),
+            'pada': moon_data.get('pada', 0)
+        }
+        return result
+    except Exception as e:
+        raise HTTPException(500, str(e))
+
+
+# ============================================
+# JAIMINI CHAR DASHA ENDPOINT
+# ============================================
+class CharDashaRequest(BaseModel):
+    dob: str
+    tob: str
+    lat: float
+    lon: float
+    tz: float
+
+@app.post('/char-dasha')
+def char_dasha_endpoint(req: CharDashaRequest):
+    try:
+        from char_dasha import get_full_char_dasha
+        y, mo, d = map(int, req.dob.split('-'))
+        h, mi = map(int, req.tob.split(':'))
+        h_local = h + mi/60.0
+        h_ut = h_local - req.tz
+        jd = get_julian_day(y, mo, d, h_ut)
+        
+        # Get planets
+        planets = get_all_planets(jd)
+        
+        # Get Lagna using Swiss Ephemeris directly
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        cusps, ascmc = swe.houses(jd, req.lat, req.lon, b'P')
+        ayanamsha = swe.get_ayanamsa(jd)
+        lagna_lon = (ascmc[0] - ayanamsha) % 360
+        lagna_data = {'longitude': lagna_lon}
+        
+        result = get_full_char_dasha(
+            lagna_data=lagna_data,
+            planets_data=planets,
+            birth_date_str=req.dob
+        )
+        
+        result['birth_details'] = {
+            'date': req.dob,
+            'time': req.tob,
+            'location': {'lat': req.lat, 'lon': req.lon, 'tz': req.tz}
+        }
+        result['lagna_longitude'] = round(lagna_lon, 4)
+        return result
+    except Exception as e:
+        raise HTTPException(500, str(e))
+
+
+# ============================================================================
+# MAHADASHA PHALADESH ENDPOINT
+# ============================================================================
+@app.post("/mahadasha-phaladesh")
+def mahadasha_phaladesh_endpoint(req: BirthData):
+    try:
+        from phaladesh_module import get_full_phaladesh_analysis
+        from datetime import datetime, timedelta
+        
+        # Parse datetime
+        dt_str = f"{req.dob} {req.tob}"
+        dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M")
+        dt_utc = dt - timedelta(hours=req.tz)
+        jd = swe.julday(dt_utc.year, dt_utc.month, dt_utc.day,
+                        dt_utc.hour + dt_utc.minute/60.0)
+        
+        # Calculate lagna (sidereal)
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        cusps, ascmc = swe.houses(jd, req.lat, req.lon, b"P")
+        ayanamsha = swe.get_ayanamsa(jd)
+        lagna_lon = (ascmc[0] - ayanamsha) % 360
+        lagna_data = {"longitude": lagna_lon}
+        
+        # Calculate planet positions (sidereal)
+        planet_codes = {
+            "Sun": swe.SUN, "Moon": swe.MOON,
+            "Mars": swe.MARS, "Mercury": swe.MERCURY,
+            "Jupiter": swe.JUPITER, "Venus": swe.VENUS,
+            "Saturn": swe.SATURN, "Rahu": swe.MEAN_NODE
+        }
+        planets_data = {}
+        for name, code in planet_codes.items():
+            pos, _ = swe.calc_ut(jd, code, swe.FLG_SIDEREAL)
+            planets_data[name] = {"longitude": pos[0]}
+        # Ketu = Rahu + 180
+        if "Rahu" in planets_data:
+            ketu_lon = (planets_data["Rahu"]["longitude"] + 180) % 360
+            planets_data["Ketu"] = {"longitude": ketu_lon}
+        
+        # Get full phaladesh analysis
+        result = get_full_phaladesh_analysis(
+            planets_data=planets_data,
+            lagna_data=lagna_data,
+            current_dasha_graha=None
+        )
+        
+        # ENHANCEMENT: Add Smart Ratn + Marak analysis to each graha
+        try:
+            from dasha_master_analyzer import analyze_dasha_graha
+            sun_lon = planets_data.get("Sun", {}).get("longitude")
+            for graha in result.get("phaladesh", {}):
+                smart = analyze_dasha_graha(
+                    graha_name=graha,
+                    lagna_lon=lagna_lon,
+                    planets_data=planets_data,
+                    sun_longitude=sun_lon
+                )
+                if not isinstance(smart, dict) or "error" in smart:
+                    continue
+                # Inject smart analysis into existing phaladesh
+                result["phaladesh"][graha]["smart_ratn"] = smart.get("ratn_decision", {})
+                result["phaladesh"][graha]["asta_status"] = smart.get("asta", {})
+                result["phaladesh"][graha]["peedit_status"] = smart.get("peedit", {})
+                result["phaladesh"][graha]["lordship_full"] = smart.get("lordship", {})
+                result["phaladesh"][graha]["dignity"] = smart.get("dignity", {})
+        except Exception as enhance_err:
+            result["smart_enhancement_error"] = str(enhance_err)
+        
+        return result
+    except Exception as e:
+        import traceback
+        raise HTTPException(500, f"{str(e)} | {traceback.format_exc()[-500:]}")
+
+
+# ============================================================================
+# SMART ANALYSIS ENDPOINT - Master analyzer with all classical rules
+# ============================================================================
+@app.post("/smart-analysis")
+def smart_analysis_endpoint(req: BirthData):
+    try:
+        from dasha_master_analyzer import analyze_dasha_graha
+        from datetime import datetime, timedelta
+        
+        dt_str = f"{req.dob} {req.tob}"
+        dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M")
+        dt_utc = dt - timedelta(hours=req.tz)
+        jd = swe.julday(dt_utc.year, dt_utc.month, dt_utc.day,
+                        dt_utc.hour + dt_utc.minute/60.0)
+        
+        swe.set_sid_mode(swe.SIDM_LAHIRI)
+        cusps, ascmc = swe.houses(jd, req.lat, req.lon, b"P")
+        ayanamsha = swe.get_ayanamsa(jd)
+        lagna_lon = (ascmc[0] - ayanamsha) % 360
+        
+        # Calculate planets with vakri detection
+        planet_codes = {
+            "Sun": swe.SUN, "Moon": swe.MOON,
+            "Mars": swe.MARS, "Mercury": swe.MERCURY,
+            "Jupiter": swe.JUPITER, "Venus": swe.VENUS,
+            "Saturn": swe.SATURN, "Rahu": swe.MEAN_NODE
+        }
+        planets_data = {}
+        sun_lon = None
+        for name, code in planet_codes.items():
+            pos, _ = swe.calc_ut(jd, code, swe.FLG_SIDEREAL | swe.FLG_SPEED)
+            longitude = pos[0]
+            speed = pos[3]
+            is_vakri = speed < 0
+            planets_data[name] = {"longitude": longitude, "vakri": is_vakri}
+            if name == "Sun":
+                sun_lon = longitude
+        # Ketu
+        if "Rahu" in planets_data:
+            ketu_lon = (planets_data["Rahu"]["longitude"] + 180) % 360
+            planets_data["Ketu"] = {"longitude": ketu_lon, "vakri": True}
+        
+        # Analyze each graha
+        analyses = {}
+        for graha in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+            analyses[graha] = analyze_dasha_graha(
+                graha_name=graha,
+                lagna_lon=lagna_lon,
+                planets_data=planets_data,
+                sun_longitude=sun_lon
+            )
+        
+        return {
+            "lagna_longitude": lagna_lon,
+            "lagna_rashi": int(lagna_lon / 30) % 12,
+            "sun_longitude": sun_lon,
+            "graha_analyses": analyses,
+            "reference": "Acharya Harishchandra Purohit + BPHS - Master Analyzer"
+        }
+    except Exception as e:
+        import traceback
+        raise HTTPException(500, f"{str(e)} | {traceback.format_exc()[-500:]}")

@@ -140,69 +140,89 @@ def analyze_gochar(moon_sign: int, transit_positions: dict) -> dict:
     """
     results = {}
 
-    # Saturn — Sade Sati & Dhaya
+    # Saturn - Sade Sati & Dhaiya (CLASSICAL Brihat Parashara)
+    # Sade Sati: bhav 12, 1, 2 | Dhaiya: bhav 4 (Kantak), bhav 8 (Ashtam)
     saturn_sign = transit_positions['Saturn']['rashi_num']
-    saturn_diff = (saturn_sign - moon_sign) % 12
-    if saturn_diff == 0:
-        sade_sati = "Peak Sade Sati (Chandra pe Shani)"
-    elif saturn_diff == 11:
-        sade_sati = "Sade Sati Start (12th se)"
-    elif saturn_diff == 1:
-        sade_sati = "Sade Sati End (2nd mein)"
-    elif saturn_diff == 4:
-        sade_sati = "Ardha Sade Sati (Dhaya) — 4th Shani"
-    elif saturn_diff == 7:
-        sade_sati = "Ardha Sade Sati (Dhaya) — 7th Shani"
-    else:
-        sade_sati = "Normal — Sade Sati nahi"
+    saturn_bhav = ((saturn_sign - moon_sign) % 12) + 1
 
+    if saturn_bhav == 12:
+        sade_sati = "Sade Sati Phase 1 - 12th Shani (vyaya, dhairya rakhein)"
+    elif saturn_bhav == 1:
+        sade_sati = "Sade Sati Peak - Chandra pe Shani (sabse kathin phase)"
+    elif saturn_bhav == 2:
+        sade_sati = "Sade Sati Phase 3 - 2nd Shani (dhana hani savdhaan)"
+    elif saturn_bhav == 4:
+        sade_sati = "Kantak Shani / Ardha Dhaiya - 4th bhav (sukh, vahan)"
+    elif saturn_bhav == 8:
+        sade_sati = "Ashtam Shani / Dhaiya - 8th bhav (rog, vyaya)"
+    else:
+        sade_sati = "Normal - Sade Sati ya Dhaiya nahi"
+
+    is_kasht = saturn_bhav in [12, 1, 2, 4, 8]
     results['sade_sati'] = {
         'status': sade_sati,
         'saturn_rashi': transit_positions['Saturn']['rashi'],
         'moon_rashi': RASHI_NAMES[(moon_sign - 1) % 12],
-        'tip': "Shani ki pooja karein, Shanivaar ko tel daan karein" if "Sade Sati" in sade_sati or "Dhaya" in sade_sati else "Koi vishesh upay ki zaroorat nahi"
+        'saturn_bhav': saturn_bhav,
+        'is_kasht': is_kasht,
+        'tip': "Shanivaar ko tel daan, Shani chalisa, Hanuman puja karein" if is_kasht else "Koi vishesh upay ki zaroorat nahi"
     }
 
-    # Jupiter — Guru Gochar
+    # Jupiter - Guru Gochar (CLASSICAL Brihat Parashara)
+    # Shubh: 2,5,7,9,11 | Ashubh: 3,6,10 | Madhyam: 1,4,8,12
     guru_sign = transit_positions['Jupiter']['rashi_num']
-    guru_diff = (guru_sign - moon_sign) % 12
-    if guru_diff in [1, 4, 7, 10]:
-        guru_status = "Shubh — Guru anukoola sthiti mein"
-    elif guru_diff in [3, 6, 8, 12]:
-        guru_status = "Madhyam — Guru ka saadharan prabhav"
+    guru_bhav = ((guru_sign - moon_sign) % 12) + 1
+
+    if guru_bhav in [2, 5, 7, 9, 11]:
+        guru_status = "Shubh Guru Gochar - " + str(guru_bhav) + "th bhav (anukool sthiti)"
+        guru_is_shubh = True
+    elif guru_bhav in [3, 6, 10]:
+        guru_status = "Ashubh Guru Gochar - " + str(guru_bhav) + "th bhav (vighna sambhav)"
+        guru_is_shubh = False
     else:
-        guru_status = "Prabal — Guru ka vishesh prabhav"
+        guru_status = "Madhyam Guru Gochar - " + str(guru_bhav) + "th bhav (saadharan prabhav)"
+        guru_is_shubh = False
 
     results['guru_gochar'] = {
         'status': guru_status,
         'jupiter_rashi': transit_positions['Jupiter']['rashi'],
-        'diff_house': guru_diff if guru_diff != 0 else 12,
+        'diff_house': guru_bhav,
+        'bhav': guru_bhav,
+        'is_shubh': guru_is_shubh,
     }
 
-    # Rahu-Ketu axis
+    # Rahu-Ketu Gochar (CLASSICAL - Rahu shubh: 3,6,10,11)
     rahu_sign = transit_positions['Rahu']['rashi_num']
-    rahu_diff = (rahu_sign - moon_sign) % 12
-    if rahu_diff in [1, 5, 9]:
-        rahu_status = "Shubh Rahu sthiti"
-    elif rahu_diff in [8, 12, 4]:
-        rahu_status = "Rahu se savdhaan — unexpected changes possible"
+    rahu_bhav = ((rahu_sign - moon_sign) % 12) + 1
+    ketu_bhav = ((rahu_bhav + 5) % 12) + 1
+
+    if rahu_bhav in [3, 6, 10, 11]:
+        rahu_status = "Shubh Rahu - " + str(rahu_bhav) + "th bhav (saahas, labh, karm vriddhi)"
+    elif rahu_bhav in [1, 5, 9]:
+        rahu_status = "Ashubh Rahu - " + str(rahu_bhav) + "th bhav (savdhaan rahein)"
     else:
-        rahu_status = "Normal Rahu sthiti"
+        rahu_status = "Madhyam Rahu - " + str(rahu_bhav) + "th bhav (saadharan prabhav)"
 
     results['rahu_ketu'] = {
         'status': rahu_status,
         'rahu_rashi': transit_positions['Rahu']['rashi'],
         'ketu_rashi': transit_positions['Ketu']['rashi'],
+        'rahu_bhav': rahu_bhav,
+        'ketu_bhav': ketu_bhav,
     }
 
-    # Overall summary
-    all_statuses = [results['sade_sati']['status'], results['guru_gochar']['status']]
-    if any('Sade Sati' in s or 'Dhaya' in s for s in all_statuses):
-        overall = "Kashtkaal — Dhairya rakhen, Shani upay karein"
-    elif 'Shubh' in results['guru_gochar']['status']:
-        overall = "Shubh kaal — Naye kaam shuru karne ka sahi samay"
+    # Overall summary (CLASSICAL based)
+    is_kasht_flag = results['sade_sati'].get('is_kasht', False)
+    is_guru_shubh_flag = results['guru_gochar'].get('is_shubh', False)
+
+    if is_kasht_flag and not is_guru_shubh_flag:
+        overall = "Kashtkaal - Dhairya rakhein, Shani upay zaroor karein"
+    elif is_kasht_flag and is_guru_shubh_flag:
+        overall = "Mishrit kaal - Shani kasht hai par Guru raksha kar rahe hain"
+    elif is_guru_shubh_flag:
+        overall = "Shubh kaal - Naye kaam shuru karne ka sahi samay"
     else:
-        overall = "Madhyam kaal — Sambhal ke chalein"
+        overall = "Madhyam kaal - Sambhal ke chalein, dhairya rakhein"
 
     results['overall'] = overall
     results['transit_date'] = datetime.now().strftime('%Y-%m-%d')
